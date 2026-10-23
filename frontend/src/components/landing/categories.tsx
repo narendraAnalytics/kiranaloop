@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SectionHeading } from "@/components/landing/section-heading";
 import { RevealItem, RevealList } from "@/components/motion/reveal";
 import { categories } from "@/lib/mock-data";
@@ -18,15 +19,25 @@ export function Categories() {
           <RevealItem key={c.slug} className="w-28 shrink-0 snap-start sm:w-auto">
             <a
               href={`#${c.slug}`}
-              className="group flex aspect-[4/5] flex-col justify-between rounded-[1.75rem] p-3 outline-none ring-ink/0 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_30px_-18px_rgba(11,59,60,0.5)] focus-visible:ring-2 focus-visible:ring-ink"
+              className="group relative flex aspect-[4/5] overflow-hidden flex-col justify-between rounded-[1.75rem] p-3 outline-none ring-ink/0 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_30px_-18px_rgba(11,59,60,0.5)] focus-visible:ring-2 focus-visible:ring-ink"
               style={{ backgroundColor: c.tint }}
             >
-              <span className="grid flex-1 place-items-center text-5xl" aria-hidden>
-                <span className="inline-block transition-transform duration-300 group-hover:scale-110 group-hover:animate-wiggle">
-                  {c.emoji}
+              {c.image ? (
+                <Image
+                  src={c.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 130px, 112px"
+                  className="-translate-y-[9%] scale-[1.2] object-contain transition-transform duration-300 group-hover:-translate-y-[11%] group-hover:scale-[1.28]"
+                />
+              ) : (
+                <span className="grid flex-1 place-items-center text-5xl" aria-hidden>
+                  <span className="inline-block transition-transform duration-300 group-hover:scale-110 group-hover:animate-wiggle">
+                    {c.emoji}
+                  </span>
                 </span>
-              </span>
-              <span className="text-[0.82rem] font-bold leading-tight text-ink">{c.name}</span>
+              )}
+              <span className="relative z-10 mt-auto text-[0.82rem] font-bold leading-tight text-ink">{c.name}</span>
             </a>
           </RevealItem>
         ))}

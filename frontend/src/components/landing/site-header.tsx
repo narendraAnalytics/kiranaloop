@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
@@ -12,10 +13,14 @@ import { useFly } from "@/store/fly";
 export function Logo({ className = "", tone = "ink" }: { className?: string; tone?: "ink" | "light" }) {
   return (
     <Link href="/" className={`group flex items-center gap-2.5 ${className}`} aria-label="KiranaLoop home">
-      <span className="relative grid size-10 place-items-center rounded-2xl bg-saffron font-heading text-lg font-black text-ink transition-transform duration-300 group-hover:-rotate-6">
-        K
-        <span className="absolute -right-1 -top-1 size-3.5 rounded-full border-2 border-white bg-rani" aria-hidden />
-      </span>
+      <Image
+        src="https://res.cloudinary.com/dkqbzwicr/image/upload/v1792764608/logo_c5dpbc.png"
+        alt=""
+        width={53}
+        height={48}
+        sizes="53px"
+        className="-my-1 h-12 w-auto shrink-0 drop-shadow-[0_4px_8px_rgba(19,138,85,0.35)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
+      />
       <span
         className={`font-heading text-lg font-bold tracking-tight ${tone === "light" ? "text-white" : "text-ink"}`}
       >

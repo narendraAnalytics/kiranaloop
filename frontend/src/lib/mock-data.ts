@@ -3,6 +3,8 @@ export type Category = {
   name: string;
   emoji: string;
   tint: string;
+  /** Optional illustration shown instead of the emoji. */
+  image?: string;
 };
 
 export type Product = {
@@ -37,7 +39,8 @@ export type Store = {
 };
 
 export const categories: Category[] = [
-  { slug: "fruits-veg", name: "Fruits & veg", emoji: "🥬", tint: "#e3f4e1" },
+  { slug: "fruits-veg", name: "Fruits & veg", emoji: "🥬", tint: "#e3f4e1",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792766855/fruitsandveg_qvjghr.png" },
   { slug: "dairy-eggs", name: "Dairy & eggs", emoji: "🥛", tint: "#e4eefb" },
   { slug: "atta-rice-dal", name: "Atta, rice & dal", emoji: "🌾", tint: "#fdf0cf" },
   { slug: "masala-oil", name: "Masala & oil", emoji: "🌶️", tint: "#fde3dd" },
