@@ -31,7 +31,7 @@ The project is at the start of Phase 3. The storefront is built on mock data; th
 - Responsive landing page for laptop and mobile, with a bottom tab bar on phones
 - Product detail pages with price, savings, the selling shop and related items
 - Basket drawer with quantity controls, saved in the browser
-- Address book with validation and a mock list of serviceable pincodes
+- Address book with validation and serviceable pincodes for Palakollu (534260), Yelamanchili (534268) and Narasapuram (534275) in West Godavari, Andhra Pradesh
 - Checkout with delivery time, payment choice and an order summary grouped by shop
 - Order confirmation page
 

@@ -4,8 +4,10 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { ArrowRight, Check, Clock, MapPin, PackageCheck, Sparkles, Star } from "lucide-react";
 import { Awning } from "@/components/landing/awning";
+import { defaultPincode, stores } from "@/lib/mock-data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+const lead = stores[0];
 const headline = "Your kirana, at your door in 15 minutes.";
 
 const stickers = [
@@ -75,7 +77,7 @@ export function Hero() {
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-leaf/60 motion-reduce:animate-none" />
                 <span className="relative inline-flex size-2.5 rounded-full bg-leaf" />
               </span>
-              3 shops are open near Indiranagar
+              {stores.length} shops are open near Palakollu
             </motion.p>
 
             <h1 className="mt-6 max-w-[15ch] text-[2.05rem] font-extrabold leading-[1.05] sm:text-5xl lg:text-[3.5rem] xl:text-[4rem]">
@@ -102,7 +104,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.85, ease }}
             >
               <p className="mt-6 max-w-[44ch] text-lg leading-relaxed text-ink/80">
-                Order from the shops you already know. Ramesh-ji packs it, a rider brings it, and we
+                Order from the shops you already know. {lead.callName} packs it, a rider brings it, and we
                 remember what you buy every week.
               </p>
 
@@ -116,7 +118,7 @@ export function Hero() {
                     id="pincode"
                     inputMode="numeric"
                     maxLength={6}
-                    defaultValue="560038"
+                    defaultValue={defaultPincode}
                     placeholder="Enter your pincode"
                     className="min-w-0 flex-1 bg-transparent text-lg font-semibold outline-none placeholder:font-normal placeholder:text-muted-foreground"
                   />
@@ -174,12 +176,12 @@ function ShopCard() {
       <Awning className="h-5" colors={["bg-ink", "bg-saffron-soft"]} />
       <div className="p-5 sm:p-6">
         <div className="flex items-center gap-4">
-          <span className="grid size-14 place-items-center rounded-2xl bg-saffron font-heading text-lg font-black">SG</span>
+          <span className="grid size-14 place-items-center rounded-2xl bg-saffron font-heading text-lg font-black">{lead.initials}</span>
           <div className="min-w-0">
-            <p className="truncate font-heading text-base font-bold sm:text-lg">Sharma General Store</p>
+            <p className="truncate font-heading text-base font-bold sm:text-lg">{lead.name}</p>
             <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
               <Star className="size-3.5 fill-saffron text-saffron" aria-hidden />
-              4.8 · 400 m · Ramesh-ji
+              {lead.rating} · {lead.distance} · {lead.callName}
             </p>
           </div>
         </div>
@@ -227,7 +229,7 @@ function ShopCard() {
         >
           <Sparkles className="mt-0.5 size-4 shrink-0 text-rani" aria-hidden />
           <span>
-            <strong>Running low on eggs?</strong> You usually buy them on Sundays. Add 6 from Sharma
+            <strong>Running low on eggs?</strong> You usually buy them on Sundays. Add 6 from {lead.short}{" "}
             Store.
           </span>
         </motion.p>

@@ -19,8 +19,13 @@ export type Product = {
 export type Store = {
   id: string;
   name: string;
+  /** One-word name for chips and tight labels. */
+  short: string;
   owner: string;
+  /** How customers address the owner, for example "Satyanarayana garu". */
+  callName: string;
   area: string;
+  pincode: string;
   distance: string;
   eta: string;
   rating: number;
@@ -46,62 +51,71 @@ export const categories: Category[] = [
 
 export const stores: Store[] = [
   {
-    id: "sharma",
-    name: "Sharma General Store",
-    owner: "Ramesh Sharma",
-    area: "5th Cross, Indiranagar",
+    id: "lakshmi",
+    name: "Sri Lakshmi General Store",
+    short: "Lakshmi",
+    owner: "Satyanarayana Murthy",
+    callName: "Satyanarayana garu",
+    area: "Gandhi Bomma Centre, Palakollu",
+    pincode: "534260",
     distance: "400 m",
     eta: "12 min",
     rating: 4.8,
     orders: "2,300+ orders",
     known: "Fresh dairy and daily staples",
     closes: "Open till 10:30 pm",
-    initials: "SG",
+    initials: "SL",
     tint: "#ff9f1c",
   },
   {
-    id: "gupta",
-    name: "Gupta Fruit & Veg",
-    owner: "Anita Gupta",
-    area: "12th Main, Indiranagar",
+    id: "venkata",
+    name: "Venkata Fruits & Veg",
+    short: "Venkata",
+    owner: "Padmavathi Devi",
+    callName: "Padmavathi garu",
+    area: "Main Road, Palakollu",
+    pincode: "534260",
     distance: "650 m",
     eta: "15 min",
     rating: 4.7,
     orders: "1,800+ orders",
     known: "Vegetables picked every morning",
     closes: "Open till 9 pm",
-    initials: "GF",
+    initials: "VF",
     tint: "#7ccf8f",
   },
   {
-    id: "bansal",
-    name: "Bansal Provision",
-    owner: "Vijay Bansal",
-    area: "CMH Road, Indiranagar",
+    id: "sairam",
+    name: "Sai Ram Provisions",
+    short: "Sai Ram",
+    owner: "Srinivas Rao",
+    callName: "Srinivas garu",
+    area: "Bhaggeswaram, Palakollu",
+    pincode: "534260",
     distance: "900 m",
     eta: "18 min",
     rating: 4.9,
     orders: "3,100+ orders",
     known: "Dals, spices and dry fruit",
     closes: "Open till 10 pm",
-    initials: "BP",
+    initials: "SR",
     tint: "#f48a7a",
   },
 ];
 
 export const products: Product[] = [
-  { id: "milk", name: "Full cream milk", size: "500 ml", price: 33, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "sharma" },
-  { id: "eggs", name: "Farm eggs", size: "6 pcs", price: 54, mrp: 60, emoji: "🥚", tint: "#fdf0cf", storeId: "sharma" },
-  { id: "bread", name: "Brown bread", size: "400 g", price: 45, mrp: 50, emoji: "🍞", tint: "#fbeccf", storeId: "sharma" },
-  { id: "tomato", name: "Local tomato", size: "500 g", price: 22, mrp: 28, emoji: "🍅", tint: "#fde3dd", storeId: "gupta" },
-  { id: "onion", name: "Onion", size: "1 kg", price: 38, mrp: 45, emoji: "🧅", tint: "#f6e6ef", storeId: "gupta" },
-  { id: "banana", name: "Robusta banana", size: "6 pcs", price: 42, mrp: 48, emoji: "🍌", tint: "#fff3c4", storeId: "gupta" },
-  { id: "atta", name: "Sharbati atta", size: "5 kg", price: 289, mrp: 325, emoji: "🌾", tint: "#fdf0cf", storeId: "bansal" },
-  { id: "toor", name: "Toor dal", size: "1 kg", price: 165, mrp: 185, emoji: "🥜", tint: "#f8e8d6", storeId: "bansal" },
-  { id: "chai", name: "Assam chai patti", size: "250 g", price: 82, mrp: 95, emoji: "🍵", tint: "#e3f4e1", storeId: "bansal" },
-  { id: "paneer", name: "Fresh paneer", size: "200 g", price: 78, mrp: 85, emoji: "🧀", tint: "#fff3c4", storeId: "sharma" },
-  { id: "mustard", name: "Mustard oil", size: "1 L", price: 168, mrp: 185, emoji: "🍯", tint: "#fdf0cf", storeId: "bansal" },
-  { id: "biscuits", name: "Glucose biscuits", size: "300 g", price: 30, mrp: 32, emoji: "🍪", tint: "#f8e8d6", storeId: "sharma" },
+  { id: "milk", name: "Full cream milk", size: "500 ml", price: 33, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "eggs", name: "Farm eggs", size: "6 pcs", price: 54, mrp: 60, emoji: "🥚", tint: "#fdf0cf", storeId: "lakshmi" },
+  { id: "bread", name: "Brown bread", size: "400 g", price: 45, mrp: 50, emoji: "🍞", tint: "#fbeccf", storeId: "lakshmi" },
+  { id: "tomato", name: "Local tomato", size: "500 g", price: 22, mrp: 28, emoji: "🍅", tint: "#fde3dd", storeId: "venkata" },
+  { id: "onion", name: "Onion", size: "1 kg", price: 38, mrp: 45, emoji: "🧅", tint: "#f6e6ef", storeId: "venkata" },
+  { id: "banana", name: "Robusta banana", size: "6 pcs", price: 42, mrp: 48, emoji: "🍌", tint: "#fff3c4", storeId: "venkata" },
+  { id: "atta", name: "Sharbati atta", size: "5 kg", price: 289, mrp: 325, emoji: "🌾", tint: "#fdf0cf", storeId: "sairam" },
+  { id: "toor", name: "Toor dal", size: "1 kg", price: 165, mrp: 185, emoji: "🥜", tint: "#f8e8d6", storeId: "sairam" },
+  { id: "chai", name: "Assam chai patti", size: "250 g", price: 82, mrp: 95, emoji: "🍵", tint: "#e3f4e1", storeId: "sairam" },
+  { id: "paneer", name: "Fresh paneer", size: "200 g", price: 78, mrp: 85, emoji: "🧀", tint: "#fff3c4", storeId: "lakshmi" },
+  { id: "mustard", name: "Mustard oil", size: "1 L", price: 168, mrp: 185, emoji: "🍯", tint: "#fdf0cf", storeId: "sairam" },
+  { id: "biscuits", name: "Glucose biscuits", size: "300 g", price: 30, mrp: 32, emoji: "🍪", tint: "#f8e8d6", storeId: "lakshmi" },
 ];
 
 export type ProductDetails = {
@@ -183,7 +197,10 @@ export function getCategory(slug: string): Category | undefined {
   return categories.find((c) => c.slug === slug);
 }
 
-export const servicePincodes = ["560038", "560008", "560075", "560071", "560025"];
+/** Palakollu, Yelamanchili and Narasapuram, West Godavari, Andhra Pradesh. */
+export const servicePincodes = ["534260", "534268", "534275"];
+export const defaultPincode = "534260";
+export const defaultLocation = "Palakollu, 534260";
 
 export const FREE_DELIVERY_ABOVE = 199;
 export const DELIVERY_FEE = 25;

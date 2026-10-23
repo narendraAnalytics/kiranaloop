@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { ChevronDown, MapPin, Search, ShoppingBasket, UserRound } from "lucide-react";
-import { formatPrice } from "@/lib/mock-data";
+import { defaultLocation, formatPrice } from "@/lib/mock-data";
 import { selectCurrentAddress, useAddresses } from "@/store/address";
 import { selectCount, selectTotal, useCart } from "@/store/cart";
 import { useFly } from "@/store/fly";
@@ -119,7 +119,7 @@ export function SiteHeader() {
             <span className="block text-sm font-bold">12–18 min</span>
             <span className="flex items-center gap-1 text-xs text-muted-foreground">
               <span className="max-w-[16rem] truncate">
-                {address ? `${address.label} · ${address.area}` : "Indiranagar, 560038"}
+                {address ? `${address.label} · ${address.area}` : defaultLocation}
               </span>
               <ChevronDown className="size-3.5 shrink-0" aria-hidden />
             </span>

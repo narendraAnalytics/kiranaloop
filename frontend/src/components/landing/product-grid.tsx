@@ -78,7 +78,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             <span />
           )}
           <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold backdrop-blur ${glass}`}>
-            {getStore(product.storeId)?.name.split(" ")[0]}
+            {getStore(product.storeId)?.short}
           </span>
         </div>
 

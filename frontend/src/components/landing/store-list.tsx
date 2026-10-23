@@ -87,7 +87,6 @@ export function StoreList() {
       <ul className="mt-8 grid gap-5 md:grid-cols-3">
         {stores.map((s, i) => {
           const f = fronts[i % fronts.length];
-          const firstName = s.owner.split(" ")[0];
           return (
             <motion.li
               key={s.id}
@@ -125,7 +124,7 @@ export function StoreList() {
 
                   <h3 className="mt-5 text-xl font-bold leading-tight">{s.name}</h3>
                   <p className="mt-1 text-sm opacity-80">
-                    {firstName}-ji · {s.area}
+                    {s.callName} · {s.area}
                   </p>
 
                   <p className={`mt-4 rounded-2xl px-4 py-3 text-base font-medium backdrop-blur ${f.glass}`}>
