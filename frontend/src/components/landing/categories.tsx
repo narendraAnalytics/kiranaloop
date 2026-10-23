@@ -1,30 +1,36 @@
+import { SectionHeading } from "@/components/landing/section-heading";
+import { RevealItem, RevealList } from "@/components/motion/reveal";
 import { categories } from "@/lib/mock-data";
 
 export function Categories() {
   return (
-    <section id="categories" className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8 lg:pt-16">
-      <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Shop by aisle</h2>
-      <p className="mt-1 text-muted-foreground">Everything your local shelf has, sorted the way you look for it.</p>
+    <section id="categories" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-14 sm:px-6 lg:px-8 lg:pt-20">
+      <SectionHeading
+        title="Shop by aisle"
+        subtitle="Everything your local shelf has, sorted the way you look for it."
+      />
 
-      <ul className="-mx-4 mt-6 flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-5 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-10">
+      <RevealList
+        stagger={0.04}
+        className="-mx-4 mt-8 flex snap-x gap-3 overflow-x-auto px-4 pb-3 sm:mx-0 sm:grid sm:grid-cols-5 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-10"
+      >
         {categories.map((c) => (
-          <li key={c.slug} className="w-24 shrink-0 snap-start sm:w-auto">
+          <RevealItem key={c.slug} className="w-28 shrink-0 snap-start sm:w-auto">
             <a
               href={`#${c.slug}`}
-              className="group flex flex-col items-center gap-2 rounded-2xl p-1 text-center outline-none focus-visible:ring-2 focus-visible:ring-indigo"
+              className="group flex aspect-[4/5] flex-col justify-between rounded-[1.75rem] p-3 outline-none ring-ink/0 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_30px_-18px_rgba(11,59,60,0.5)] focus-visible:ring-2 focus-visible:ring-ink"
+              style={{ backgroundColor: c.tint }}
             >
-              <span
-                className="grid aspect-square w-full place-items-center rounded-3xl text-4xl transition-transform group-hover:-translate-y-1 sm:text-5xl"
-                style={{ backgroundColor: c.tint }}
-                aria-hidden
-              >
-                {c.emoji}
+              <span className="grid flex-1 place-items-center text-5xl" aria-hidden>
+                <span className="inline-block transition-transform duration-300 group-hover:scale-110 group-hover:animate-wiggle">
+                  {c.emoji}
+                </span>
               </span>
-              <span className="text-sm font-semibold leading-tight">{c.name}</span>
+              <span className="text-[0.82rem] font-bold leading-tight text-ink">{c.name}</span>
             </a>
-          </li>
+          </RevealItem>
         ))}
-      </ul>
+      </RevealList>
     </section>
   );
 }

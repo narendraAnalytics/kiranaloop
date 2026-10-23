@@ -30,7 +30,7 @@ export function ConfirmedView() {
         <p className="text-muted-foreground">When you place an order, you will see it here.</p>
         <Link
           href="/"
-          className="mt-3 inline-flex h-12 items-center rounded-full bg-indigo px-7 font-bold text-white outline-none hover:bg-indigo/90 focus-visible:ring-4 focus-visible:ring-indigo/30"
+          className="mt-3 inline-flex h-12 items-center rounded-full bg-ink px-7 font-bold text-white outline-none hover:bg-ink/90 focus-visible:ring-4 focus-visible:ring-ink/30"
         >
           Start shopping
         </Link>
@@ -43,7 +43,7 @@ export function ConfirmedView() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <div className="rounded-[2rem] bg-indigo p-6 text-white sm:p-10">
+      <div className="rounded-[2rem] bg-ink p-6 text-white sm:p-10">
         <span className="grid size-14 place-items-center rounded-full bg-leaf">
           <Check className="size-7" aria-hidden />
         </span>
@@ -57,7 +57,7 @@ export function ConfirmedView() {
           {steps.map(({ icon: Icon, label, done }) => (
             <li key={label} className="flex flex-col items-center gap-2 text-center text-xs sm:text-sm">
               <span
-                className={`grid size-11 place-items-center rounded-full ${done ? "bg-marigold text-indigo" : "bg-white/10 text-white/60"}`}
+                className={`grid size-11 place-items-center rounded-full ${done ? "bg-saffron text-ink" : "bg-white/10 text-white/60"}`}
               >
                 <Icon className="size-5" aria-hidden />
               </span>
@@ -102,7 +102,7 @@ export function ConfirmedView() {
       <div className="mt-8 text-center">
         <Link
           href="/"
-          className="inline-flex h-14 items-center rounded-full bg-marigold px-8 text-lg font-bold text-indigo outline-none hover:-translate-y-0.5 focus-visible:ring-4 focus-visible:ring-indigo/30"
+          className="inline-flex h-14 items-center rounded-full bg-saffron px-8 text-lg font-bold text-ink outline-none hover:-translate-y-0.5 focus-visible:ring-4 focus-visible:ring-ink/30"
         >
           Keep shopping
         </Link>

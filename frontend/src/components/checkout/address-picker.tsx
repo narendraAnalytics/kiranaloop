@@ -46,8 +46,8 @@ export function AddressPicker({ onSelected }: { onSelected?: () => void }) {
                       }}
                       className="peer sr-only"
                     />
-                    <span className="flex gap-4 rounded-2xl border bg-white p-4 pr-14 peer-checked:border-indigo peer-checked:ring-2 peer-checked:ring-indigo peer-focus-visible:ring-4 peer-focus-visible:ring-indigo/30">
-                      <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-marigold-soft text-indigo">
+                    <span className="flex gap-4 rounded-2xl border bg-white p-4 pr-14 peer-checked:border-ink peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:ring-4 peer-focus-visible:ring-ink/30">
+                      <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-saffron-soft text-ink">
                         <Icon className="size-5" aria-hidden />
                       </span>
                       <span className="min-w-0">
@@ -63,7 +63,7 @@ export function AddressPicker({ onSelected }: { onSelected?: () => void }) {
                     type="button"
                     onClick={() => remove(a.id)}
                     aria-label={`Delete ${a.label} address`}
-                    className="absolute right-3 top-3 grid size-9 place-items-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-chilli focus-visible:ring-2 focus-visible:ring-indigo"
+                    className="absolute right-3 top-3 grid size-9 place-items-center rounded-full text-muted-foreground outline-none hover:bg-muted hover:text-rani focus-visible:ring-2 focus-visible:ring-ink"
                   >
                     <Trash2 className="size-4" aria-hidden />
                   </button>
@@ -89,7 +89,7 @@ export function AddressPicker({ onSelected }: { onSelected?: () => void }) {
         <button
           type="button"
           onClick={() => setAdding(true)}
-          className="flex h-14 w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed font-bold text-indigo outline-none hover:bg-white focus-visible:ring-4 focus-visible:ring-indigo/30"
+          className="flex h-14 w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed font-bold text-ink outline-none hover:bg-white focus-visible:ring-4 focus-visible:ring-ink/30"
         >
           <Plus className="size-5" aria-hidden />
           Add a new address

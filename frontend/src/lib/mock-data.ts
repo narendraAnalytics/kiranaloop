@@ -57,7 +57,7 @@ export const stores: Store[] = [
     known: "Fresh dairy and daily staples",
     closes: "Open till 10:30 pm",
     initials: "SG",
-    tint: "#ffb627",
+    tint: "#ff9f1c",
   },
   {
     id: "gupta",

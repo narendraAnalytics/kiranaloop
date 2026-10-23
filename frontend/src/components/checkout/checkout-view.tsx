@@ -31,7 +31,7 @@ function Section({
   return (
     <section className="rounded-3xl border bg-white/60 p-4 sm:p-6">
       <h2 className="flex items-center gap-3 text-xl font-bold">
-        <span className="grid size-8 place-items-center rounded-full bg-indigo text-sm text-white">
+        <span className="grid size-8 place-items-center rounded-full bg-ink text-sm text-white">
           {step}
         </span>
         {title}
@@ -66,16 +66,16 @@ function RadioCard({
         onChange={onChange}
         className="peer sr-only"
       />
-      <span className="flex items-center justify-between gap-3 rounded-2xl border bg-white p-4 peer-checked:border-indigo peer-checked:ring-2 peer-checked:ring-indigo peer-focus-visible:ring-4 peer-focus-visible:ring-indigo/30">
+      <span className="flex items-center justify-between gap-3 rounded-2xl border bg-white p-4 peer-checked:border-ink peer-checked:ring-2 peer-checked:ring-ink peer-focus-visible:ring-4 peer-focus-visible:ring-ink/30">
         <span>
           <span className="block font-semibold">{label}</span>
           <span className="text-sm text-muted-foreground">{detail}</span>
         </span>
         <span
-          className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${checked ? "border-indigo" : "border-muted-foreground/40"}`}
+          className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${checked ? "border-ink" : "border-muted-foreground/40"}`}
           aria-hidden
         >
-          {checked && <span className="size-2.5 rounded-full bg-indigo" />}
+          {checked && <span className="size-2.5 rounded-full bg-ink" />}
         </span>
       </span>
     </label>
@@ -103,14 +103,14 @@ export function CheckoutView() {
   if (entries.length === 0) {
     return (
       <div className="mx-auto flex max-w-md flex-col items-center gap-3 py-16 text-center">
-        <span className="grid size-16 place-items-center rounded-full bg-marigold-soft text-indigo">
+        <span className="grid size-16 place-items-center rounded-full bg-saffron-soft text-ink">
           <ShoppingBasket className="size-7" aria-hidden />
         </span>
         <h2 className="text-2xl font-bold">Your basket is empty</h2>
         <p className="text-muted-foreground">Add a few things from your neighbourhood shops, then come back to check out.</p>
         <Link
           href="/"
-          className="mt-3 inline-flex h-12 items-center rounded-full bg-indigo px-7 font-bold text-white outline-none hover:bg-indigo/90 focus-visible:ring-4 focus-visible:ring-indigo/30"
+          className="mt-3 inline-flex h-12 items-center rounded-full bg-ink px-7 font-bold text-white outline-none hover:bg-ink/90 focus-visible:ring-4 focus-visible:ring-ink/30"
         >
           Start shopping
         </Link>
@@ -203,7 +203,7 @@ export function CheckoutView() {
           type="button"
           disabled={!canPlace}
           onClick={placeOrder}
-          className="mt-5 h-14 w-full rounded-full bg-marigold text-lg font-bold text-indigo outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-4 focus-visible:ring-indigo/30 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50"
+          className="mt-5 h-14 w-full rounded-full bg-saffron text-lg font-bold text-ink outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-4 focus-visible:ring-ink/30 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {address ? `Place order · ${formatPrice(pricing.total)}` : "Add an address to continue"}
         </button>

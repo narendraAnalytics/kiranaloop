@@ -21,8 +21,8 @@ export function PriceBreakdown({ pricing }: { pricing: Pricing }) {
   return (
     <>
       {pricing.amountToFreeDelivery > 0 && (
-        <p className="flex items-center gap-2 rounded-xl bg-marigold-soft px-3 py-2 text-sm">
-          <Truck className="size-4 shrink-0 text-indigo" aria-hidden />
+        <p className="flex items-center gap-2 rounded-xl bg-saffron-soft px-3 py-2 text-sm">
+          <Truck className="size-4 shrink-0 text-ink" aria-hidden />
           Add {formatPrice(pricing.amountToFreeDelivery)} more for free delivery.
         </p>
       )}

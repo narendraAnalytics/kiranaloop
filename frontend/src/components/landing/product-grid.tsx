@@ -1,93 +1,276 @@
 "use client";
 
 import Link from "next/link";
+import { useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { Plus } from "lucide-react";
 import { Stepper } from "@/components/landing/cart-sheet";
-import { formatPrice, getStore, products, type Product } from "@/lib/mock-data";
+import { SectionHeading } from "@/components/landing/section-heading";
+import { TiltCard } from "@/components/motion/tilt-card";
+import {
+  formatPrice,
+  getCategory,
+  getProductDetails,
+  getStore,
+  products,
+  type Product,
+} from "@/lib/mock-data";
 import { useCart } from "@/store/cart";
+import { useFly } from "@/store/fly";
 
-export function ProductCard({ product }: { product: Product }) {
+type Theme = { from: string; to: string; dark: boolean; soft: string };
+
+// One bold two-tone gradient per aisle. Dark themes carry white text, light ones teal.
+// `soft` is the resting tint for the aisle's filter chip.
+const themes: Record<string, Theme> = {
+  "dairy-eggs": { from: "#efe8ff", to: "#cdb8ff", dark: false, soft: "#efe8ff" },
+  "fruits-veg": { from: "#d6f9e8", to: "#3ddc97", dark: false, soft: "#d6f9e8" },
+  bakery: { from: "#ffe6c2", to: "#ff9f1c", dark: false, soft: "#ffe6c2" },
+  "atta-rice-dal": { from: "#fff3c4", to: "#ffc93c", dark: false, soft: "#fff3c4" },
+  "tea-coffee": { from: "#2fa56f", to: "#11724a", dark: true, soft: "#d3efe1" },
+  "masala-oil": { from: "#ff6b9b", to: "#e11d63", dark: true, soft: "#ffd9e6" },
+  snacks: { from: "#ffd2bd", to: "#ff7a45", dark: false, soft: "#ffe3d6" },
+};
+const fallback: Theme = { from: "#ffffff", to: "#e2f1ea", dark: false, soft: "#e2f1ea" };
+const allTheme: Theme = { from: "#1d5a5b", to: "#0b3b3c", dark: true, soft: "#dff2ea" };
+
+function themeFor(product: Product): Theme {
+  return themes[getProductDetails(product.id)?.category ?? ""] ?? fallback;
+}
+
+export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
   const qty = useCart((s) => s.lines[product.id] ?? 0);
   const add = useCart((s) => s.add);
   const remove = useCart((s) => s.remove);
+  const launch = useFly((s) => s.launch);
+  const emojiRef = useRef<HTMLSpanElement>(null);
   const save = product.mrp - product.price;
+  const t = themeFor(product);
+  const text = t.dark ? "text-white" : "text-ink";
+  const glass = t.dark ? "bg-white/15" : "bg-white/50";
+
+  function addOne() {
+    add(product.id);
+    if (emojiRef.current) launch(product.emoji, emojiRef.current.getBoundingClientRect());
+  }
 
   return (
-    <li className="flex flex-col rounded-3xl border bg-white p-3 sm:p-4">
-      <Link
-        href={`/product/${product.id}`}
-        tabIndex={-1}
-        aria-hidden
-        className="relative grid aspect-square place-items-center rounded-2xl text-6xl sm:text-7xl"
-        style={{ backgroundColor: product.tint }}
+    <motion.li
+      layout
+      initial={{ opacity: 0, y: 48, rotate: index % 2 ? 4 : -4 }}
+      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ type: "spring", stiffness: 160, damping: 18, delay: (index % 4) * 0.07 }}
+    >
+      <TiltCard
+        max={8}
+        className={`flex h-full flex-col rounded-[1.9rem] p-3 shadow-[0_26px_50px_-34px_rgba(11,59,60,0.8)] ${text}`}
+        style={{ backgroundImage: `linear-gradient(160deg, ${t.from}, ${t.to})` }}
       >
-        <span>{product.emoji}</span>
-        {save > 0 && (
-          <span className="absolute left-2 top-2 rounded-full bg-white px-2 py-0.5 text-xs font-bold text-leaf">
-            Save {formatPrice(save)}
-          </span>
-        )}
-      </Link>
-
-      <div className="mt-3 flex-1">
-        <h3 className="font-bold leading-snug">
-          <Link
-            href={`/product/${product.id}`}
-            className="rounded outline-none hover:underline focus-visible:ring-2 focus-visible:ring-indigo"
-          >
-            {product.name}
-          </Link>
-        </h3>
-        <p className="text-sm text-muted-foreground">{product.size}</p>
-        <p className="mt-1 truncate text-xs text-muted-foreground">
-          from {getStore(product.storeId)?.name}
-        </p>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between gap-2">
-        <p className="leading-tight">
-          <span className="font-heading text-lg font-bold">{formatPrice(product.price)}</span>
-          {save > 0 && (
-            <span className="ml-1.5 text-sm text-muted-foreground line-through">
-              {formatPrice(product.mrp)}
+        <div className="relative flex items-start justify-between gap-2 px-1 pt-1">
+          {save > 0 ? (
+            <span className="relative inline-flex -rotate-6 items-center rounded-md bg-white py-1 pl-4 pr-2.5 text-xs font-black text-rani shadow-md">
+              <span className="absolute left-1.5 size-1.5 rounded-full bg-rani/30" aria-hidden />
+              {formatPrice(save)} off
             </span>
+          ) : (
+            <span />
           )}
-        </p>
+          <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold backdrop-blur ${glass}`}>
+            {getStore(product.storeId)?.name.split(" ")[0]}
+          </span>
+        </div>
 
-        {qty === 0 ? (
-          <button
-            type="button"
-            onClick={() => add(product.id)}
-            aria-label={`Add ${product.name} to basket`}
-            className="inline-flex h-10 items-center gap-1 rounded-full border-2 border-indigo px-4 text-sm font-bold text-indigo outline-none transition-colors hover:bg-indigo hover:text-white focus-visible:ring-2 focus-visible:ring-marigold focus-visible:ring-offset-2"
+        <Link
+          href={`/product/${product.id}`}
+          tabIndex={-1}
+          aria-hidden
+          className="relative mx-auto my-3 grid aspect-square w-[78%] place-items-center rounded-full bg-white/35 shadow-[inset_0_2px_12px_rgba(255,255,255,0.7)] sm:my-4"
+        >
+          <span
+            ref={emojiRef}
+            className="text-6xl transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-125 group-hover:-rotate-6 sm:text-7xl"
           >
-            <Plus className="size-4" aria-hidden />
-            Add
-          </button>
-        ) : (
-          <Stepper
-            qty={qty}
-            label={product.name}
-            onAdd={() => add(product.id)}
-            onRemove={() => remove(product.id)}
-          />
-        )}
+            {product.emoji}
+          </span>
+        </Link>
+
+        <div className={`mt-auto rounded-[1.4rem] p-3 backdrop-blur-md ${glass}`}>
+          <h3 className="font-heading text-sm font-bold leading-snug sm:text-base">
+            <Link
+              href={`/product/${product.id}`}
+              className="rounded outline-none hover:underline focus-visible:ring-2 focus-visible:ring-current"
+            >
+              {product.name}
+            </Link>
+          </h3>
+          <p className="text-xs opacity-75 sm:text-sm">{product.size}</p>
+
+          <div className="mt-2.5 flex min-h-10 items-center justify-between gap-2">
+            <p className="leading-tight">
+              <span className="font-heading text-lg font-bold">{formatPrice(product.price)}</span>
+              {save > 0 && <span className="ml-1 text-xs line-through opacity-60">{formatPrice(product.mrp)}</span>}
+            </p>
+
+            <AnimatePresence mode="popLayout" initial={false}>
+              {qty === 0 ? (
+                <motion.button
+                  key="add"
+                  type="button"
+                  onClick={addOne}
+                  aria-label={`Add ${product.name} to basket`}
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.5, opacity: 0 }}
+                  whileHover={{ rotate: 90 }}
+                  whileTap={{ scale: 0.85 }}
+                  className={`grid size-10 shrink-0 place-items-center rounded-full shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 ${
+                    t.dark ? "bg-white text-ink" : "bg-ink text-white"
+                  }`}
+                >
+                  <Plus className="size-5" aria-hidden />
+                </motion.button>
+              ) : (
+                <motion.div
+                  key="stepper"
+                  initial={{ scale: 0.7, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.7, opacity: 0 }}
+                >
+                  <Stepper qty={qty} label={product.name} onAdd={addOne} onRemove={() => remove(product.id)} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </TiltCard>
+    </motion.li>
+  );
+}
+
+const aisleSlugs = [...new Set(products.map((p) => getProductDetails(p.id)?.category).filter(Boolean))] as string[];
+const filters = [
+  { slug: "all", name: "All", emoji: "🧺", count: products.length, theme: allTheme },
+  ...aisleSlugs.map((slug) => ({
+    slug,
+    name: getCategory(slug)?.name ?? slug,
+    emoji: getCategory(slug)?.emoji ?? "🛒",
+    count: products.filter((p) => getProductDetails(p.id)?.category === slug).length,
+    theme: themes[slug] ?? fallback,
+  })),
+];
+
+function AisleFilter({ active, onChange }: { active: string; onChange: (slug: string) => void }) {
+  return (
+    <div
+      role="group"
+      aria-label="Filter by aisle"
+      className="-mx-4 mt-7 overflow-x-auto px-4 pb-2 [mask-image:linear-gradient(90deg,transparent,#000_16px,#000_calc(100%-16px),transparent)] [scrollbar-width:none] sm:mx-0 sm:overflow-visible sm:px-0 sm:[mask-image:none]"
+    >
+      <div className="inline-flex gap-1 rounded-[1.6rem] bg-white/70 p-1.5 shadow-[0_18px_40px_-28px_rgba(11,59,60,0.55)] ring-1 ring-ink/5 backdrop-blur sm:flex-wrap">
+        {filters.map((f) => {
+          const on = f.slug === active;
+          const t = f.theme;
+          return (
+            <motion.button
+              key={f.slug}
+              type="button"
+              aria-pressed={on}
+              onClick={() => onChange(f.slug)}
+              whileTap={{ scale: 0.95 }}
+              layout
+              className={`group/chip relative flex h-12 shrink-0 items-center gap-1.5 rounded-[1.2rem] pl-1.5 pr-2.5 outline-none focus-visible:ring-2 focus-visible:ring-ink ${
+                on ? (t.dark ? "text-white" : "text-ink") : "text-ink"
+              }`}
+            >
+              {/* Resting tint, revealed on hover. */}
+              {!on && (
+                <span
+                  className="absolute inset-0 rounded-[1.2rem] opacity-0 transition-opacity duration-200 group-hover/chip:opacity-100"
+                  style={{ backgroundColor: t.soft }}
+                  aria-hidden
+                />
+              )}
+              {on && (
+                <motion.span
+                  layoutId="aisle-chip"
+                  className="absolute inset-0 rounded-[1.2rem]"
+                  style={{
+                    backgroundImage: `linear-gradient(135deg, ${t.from}, ${t.to})`,
+                    boxShadow: `0 10px 24px -10px ${t.to}`,
+                  }}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  aria-hidden
+                />
+              )}
+
+              <span
+                className="relative grid size-8 place-items-center rounded-[0.8rem] text-base"
+                style={{ backgroundColor: on ? "rgba(255,255,255,0.4)" : t.soft }}
+                aria-hidden
+              >
+                <motion.span
+                  key={on ? `on-${f.slug}` : f.slug}
+                  initial={on ? { y: 0, rotate: 0 } : false}
+                  animate={on ? { y: [0, -7, 0], rotate: [0, -12, 0] } : undefined}
+                  transition={{ duration: 0.45 }}
+                  className="inline-block transition-transform group-hover/chip:scale-110"
+                >
+                  {f.emoji}
+                </motion.span>
+              </span>
+              <span className="relative font-heading text-[12.5px] font-semibold tracking-tight">{f.name}</span>
+              <AnimatePresence initial={false} mode="popLayout">
+                {on ? (
+                  <motion.span
+                    key="count"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 24 }}
+                    className={`relative grid h-5 min-w-5 place-items-center rounded-full px-1.5 text-[11px] font-bold tabular-nums ${
+                      t.dark ? "bg-white/25 text-white" : "bg-ink text-white"
+                    }`}
+                  >
+                    <span className="sr-only">, </span>
+                    {f.count}
+                    <span className="sr-only"> items</span>
+                  </motion.span>
+                ) : (
+                  <span key="sr" className="sr-only">
+                    , {f.count} items
+                  </span>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          );
+        })}
       </div>
-    </li>
+    </div>
   );
 }
 
 export function ProductGrid() {
-  return (
-    <section id="fresh" className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8 lg:pt-16">
-      <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Popular in your neighbourhood</h2>
-      <p className="mt-1 text-muted-foreground">What people on your street added to their basket this week.</p>
+  const [active, setActive] = useState("all");
+  const visible = active === "all" ? products : products.filter((p) => getProductDetails(p.id)?.category === active);
 
-      <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((p) => (
-          <ProductCard key={p.id} product={p} />
-        ))}
-      </ul>
+  return (
+    <section id="fresh" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-14 sm:px-6 lg:px-8 lg:pt-20">
+      <SectionHeading
+        title="Popular in your neighbourhood"
+        subtitle="What people on your street added to their basket this week. Tap + and watch it hop into your basket."
+      />
+
+      <AisleFilter active={active} onChange={setActive} />
+
+      <motion.ul layout className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <AnimatePresence mode="popLayout">
+          {visible.map((p, i) => (
+            <ProductCard key={p.id} product={p} index={i} />
+          ))}
+        </AnimatePresence>
+      </motion.ul>
     </section>
   );
 }

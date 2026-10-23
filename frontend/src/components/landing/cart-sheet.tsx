@@ -41,7 +41,7 @@ export function CartSheet() {
 
         {entries.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
-            <span className="grid size-16 place-items-center rounded-full bg-marigold-soft text-indigo">
+            <span className="grid size-16 place-items-center rounded-full bg-saffron-soft text-ink">
               <ShoppingBasket className="size-7" aria-hidden />
             </span>
             <p className="font-heading text-lg font-semibold">Your basket is empty</p>
@@ -49,7 +49,7 @@ export function CartSheet() {
               Add milk, atta or your usual basket and it will show up here.
             </p>
             <Button
-              className="mt-2 h-11 rounded-full bg-indigo px-6 text-base text-white hover:bg-indigo/90"
+              className="mt-2 h-11 rounded-full bg-ink px-6 text-base text-white hover:bg-ink/90"
               onClick={() => setOpen(false)}
             >
               Start shopping
@@ -96,7 +96,7 @@ export function CartSheet() {
             <Link
               href="/checkout"
               onClick={() => setOpen(false)}
-              className="inline-flex h-12 items-center justify-center rounded-full bg-marigold text-base font-bold text-indigo outline-none hover:brightness-95 focus-visible:ring-4 focus-visible:ring-indigo/30"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-saffron text-base font-bold text-ink outline-none hover:brightness-95 focus-visible:ring-4 focus-visible:ring-ink/30"
             >
               Go to checkout
             </Link>
@@ -119,12 +119,12 @@ export function Stepper({
   onRemove: () => void;
 }) {
   return (
-    <div className="flex h-10 items-center rounded-full bg-indigo text-white">
+    <div className="flex h-10 items-center rounded-full bg-ink text-white">
       <button
         type="button"
         onClick={onRemove}
         aria-label={`Remove one ${label}`}
-        className="grid size-10 place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-marigold"
+        className="grid size-10 place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-saffron"
       >
         <Minus className="size-4" aria-hidden />
       </button>
@@ -135,7 +135,7 @@ export function Stepper({
         type="button"
         onClick={onAdd}
         aria-label={`Add one more ${label}`}
-        className="grid size-10 place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-marigold"
+        className="grid size-10 place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-saffron"
       >
         <Plus className="size-4" aria-hidden />
       </button>

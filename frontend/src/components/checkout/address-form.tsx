@@ -62,10 +62,10 @@ function Field({
         autoComplete={autoComplete}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className="h-12 w-full rounded-xl border bg-white px-4 text-base outline-none placeholder:text-muted-foreground focus:border-indigo focus:ring-3 focus:ring-indigo/15 aria-invalid:border-chilli aria-invalid:ring-3 aria-invalid:ring-chilli/15"
+        className="h-12 w-full rounded-xl border bg-white px-4 text-base outline-none placeholder:text-muted-foreground focus:border-ink focus:ring-3 focus:ring-ink/15 aria-invalid:border-rani aria-invalid:ring-3 aria-invalid:ring-rani/15"
       />
       {error && (
-        <p id={errorId} className="mt-1.5 text-sm text-chilli">
+        <p id={errorId} className="mt-1.5 text-sm text-rani">
           {error}
         </p>
       )}
@@ -121,7 +121,7 @@ export function AddressForm({
                 onChange={() => set("label")(l)}
                 className="peer sr-only"
               />
-              <span className="inline-flex h-10 items-center rounded-full border px-5 text-sm font-semibold peer-checked:border-indigo peer-checked:bg-indigo peer-checked:text-white peer-focus-visible:ring-3 peer-focus-visible:ring-indigo/30">
+              <span className="inline-flex h-10 items-center rounded-full border px-5 text-sm font-semibold peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:ring-3 peer-focus-visible:ring-ink/30">
                 {l}
               </span>
             </label>
@@ -148,14 +148,14 @@ export function AddressForm({
           <button
             type="button"
             onClick={onCancel}
-            className="h-12 rounded-full border-2 px-6 font-bold outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-indigo/30"
+            className="h-12 rounded-full border-2 px-6 font-bold outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ink/30"
           >
             Cancel
           </button>
         )}
         <button
           type="submit"
-          className="h-12 rounded-full bg-indigo px-8 font-bold text-white outline-none hover:bg-indigo/90 focus-visible:ring-4 focus-visible:ring-indigo/30"
+          className="h-12 rounded-full bg-ink px-8 font-bold text-white outline-none hover:bg-ink/90 focus-visible:ring-4 focus-visible:ring-ink/30"
         >
           {submitLabel}
         </button>

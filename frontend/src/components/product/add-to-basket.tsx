@@ -21,7 +21,7 @@ export function AddToBasket({ product, compact = false }: { product: Product; co
             action: { label: "View basket", onClick: () => setOpen(true) },
           });
         }}
-        className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-marigold px-8 text-lg font-bold text-indigo outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-4 focus-visible:ring-indigo/30 active:translate-y-0 sm:w-auto sm:min-w-64"
+        className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-saffron px-8 text-lg font-bold text-ink outline-none transition-transform hover:-translate-y-0.5 focus-visible:ring-4 focus-visible:ring-ink/30 active:translate-y-0 sm:w-auto sm:min-w-64"
       >
         <ShoppingBasket className="size-5" aria-hidden />
         Add to basket
@@ -31,12 +31,12 @@ export function AddToBasket({ product, compact = false }: { product: Product; co
 
   return (
     <div className="flex w-full items-center gap-3 sm:w-auto">
-      <div className="flex h-14 flex-1 items-center justify-between rounded-full bg-indigo text-white sm:w-44 sm:flex-none">
+      <div className="flex h-14 flex-1 items-center justify-between rounded-full bg-ink text-white sm:w-44 sm:flex-none">
         <button
           type="button"
           onClick={() => remove(product.id)}
           aria-label={`Remove one ${product.name}`}
-          className="grid size-14 place-items-center rounded-full outline-none focus-visible:ring-4 focus-visible:ring-marigold"
+          className="grid size-14 place-items-center rounded-full outline-none focus-visible:ring-4 focus-visible:ring-saffron"
         >
           <Minus className="size-5" aria-hidden />
         </button>
@@ -47,7 +47,7 @@ export function AddToBasket({ product, compact = false }: { product: Product; co
           type="button"
           onClick={() => add(product.id)}
           aria-label={`Add one more ${product.name}`}
-          className="grid size-14 place-items-center rounded-full outline-none focus-visible:ring-4 focus-visible:ring-marigold"
+          className="grid size-14 place-items-center rounded-full outline-none focus-visible:ring-4 focus-visible:ring-saffron"
         >
           <Plus className="size-5" aria-hidden />
         </button>
@@ -56,7 +56,7 @@ export function AddToBasket({ product, compact = false }: { product: Product; co
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="h-14 rounded-full border-2 border-indigo px-6 font-bold text-indigo outline-none hover:bg-indigo hover:text-white focus-visible:ring-4 focus-visible:ring-indigo/30"
+          className="h-14 rounded-full border-2 border-ink px-6 font-bold text-ink outline-none hover:bg-ink hover:text-white focus-visible:ring-4 focus-visible:ring-ink/30"
         >
           View basket
         </button>

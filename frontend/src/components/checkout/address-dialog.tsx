@@ -16,7 +16,7 @@ export function AddressDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="max-h-[90dvh] w-full max-w-[calc(100%-2rem)] overflow-y-auto bg-chalk p-5 sm:max-w-xl">
+      <DialogContent className="max-h-[90dvh] w-full max-w-[calc(100%-2rem)] overflow-y-auto bg-haze p-5 sm:max-w-xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">Choose your delivery address</DialogTitle>
           <DialogDescription>

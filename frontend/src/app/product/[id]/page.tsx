@@ -119,7 +119,7 @@ export default async function ProductPage({ params }: Props) {
                 </h2>
                 <div className="mt-3 flex items-center gap-4">
                   <span
-                    className="grid size-14 shrink-0 place-items-center rounded-2xl font-heading text-lg font-extrabold text-indigo"
+                    className="grid size-14 shrink-0 place-items-center rounded-2xl font-heading text-lg font-extrabold text-ink"
                     style={{ backgroundColor: store.tint }}
                     aria-hidden
                   >
@@ -135,7 +135,7 @@ export default async function ProductPage({ params }: Props) {
                 <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
                   <div className="flex items-center gap-1.5">
                     <dt className="sr-only">Rating</dt>
-                    <Star className="size-4 fill-marigold text-marigold" aria-hidden />
+                    <Star className="size-4 fill-saffron text-saffron" aria-hidden />
                     <dd className="font-semibold">{store.rating}</dd>
                     <dd className="text-muted-foreground">{store.orders}</dd>
                   </div>
@@ -176,15 +176,15 @@ export default async function ProductPage({ params }: Props) {
             )}
 
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              <li className="flex items-start gap-3 rounded-2xl bg-marigold-soft p-4 text-sm">
-                <ShieldCheck className="mt-0.5 size-5 shrink-0 text-indigo" aria-hidden />
+              <li className="flex items-start gap-3 rounded-2xl bg-saffron-soft p-4 text-sm">
+                <ShieldCheck className="mt-0.5 size-5 shrink-0 text-ink" aria-hidden />
                 <span>
                   <strong className="block">Check it at the door</strong>
                   Not happy? Return it to the rider and get a refund.
                 </span>
               </li>
-              <li className="flex items-start gap-3 rounded-2xl bg-marigold-soft p-4 text-sm">
-                <Wallet className="mt-0.5 size-5 shrink-0 text-indigo" aria-hidden />
+              <li className="flex items-start gap-3 rounded-2xl bg-saffron-soft p-4 text-sm">
+                <Wallet className="mt-0.5 size-5 shrink-0 text-ink" aria-hidden />
                 <span>
                   <strong className="block">Pay your way</strong>
                   UPI, card, or cash on delivery.
