@@ -1,0 +1,6 @@
+# secrets and docs kept out of git
+.env
+.env.*
+*.md
+*.txt
+!README.md
