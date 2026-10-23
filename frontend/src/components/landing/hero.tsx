@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { ArrowRight, Check, Clock, MapPin, PackageCheck, Sparkles, Star } from "lucide-react";
@@ -52,7 +53,9 @@ export function Hero() {
   const cardY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
   return (
-    <section id="top" ref={ref} className="mx-auto max-w-7xl px-2 pt-3 sm:px-4 lg:pt-5">
+    <>
+    <HeroBanner />
+    <section ref={ref} className="mx-auto max-w-7xl px-2 pt-3 sm:px-4 lg:pt-5">
       <div className="relative overflow-hidden rounded-[2rem] bg-saffron text-ink sm:rounded-[2.5rem]">
         <Awning />
 
@@ -161,6 +164,38 @@ export function Hero() {
           </div>
         </div>
       </div>
+    </section>
+    </>
+  );
+}
+
+// Full-bleed banner. On lg the sticky header (80 px tall, single row) floats over its top edge;
+// below lg the header wraps to several rows and would cover the image text, so it stays above it.
+function HeroBanner() {
+  return (
+    <section
+      id="top"
+      className="relative h-[clamp(14rem,56vw,18rem)] w-full overflow-hidden bg-[#cfe6f5] sm:h-[clamp(18rem,52vw,26rem)] lg:-mt-20 lg:h-[clamp(30rem,50vw,44rem)]"
+    >
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.08 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.6, ease }}
+      >
+        <Image
+          src="https://res.cloudinary.com/dkqbzwicr/image/upload/v1792763344/Daily_Essentials_Grocery_Spread_qyi448.png"
+          alt="Fresh vegetables, fruit, eggs, rice and dal laid out on a wooden counter. Stock up on the daily essentials."
+          fill
+          preload
+          sizes="100vw"
+          className="object-cover object-[18%_30%] sm:object-[15%_30%] lg:object-[50%_0%]"
+        />
+      </motion.div>
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-haze to-transparent"
+        aria-hidden
+      />
     </section>
   );
 }
