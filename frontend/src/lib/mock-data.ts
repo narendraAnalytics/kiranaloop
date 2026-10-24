@@ -138,10 +138,58 @@ export const products: Product[] = [
   { id: "paneer", name: "Fresh paneer", size: "200 g", price: 78, mrp: 85, emoji: "🧀", tint: "#fff3c4", storeId: "lakshmi" },
   { id: "mustard", name: "Mustard oil", size: "1 L", price: 168, mrp: 185, emoji: "🍯", tint: "#fdf0cf", storeId: "sairam" },
   { id: "biscuits", name: "Glucose biscuits", size: "300 g", price: 30, mrp: 32, emoji: "🍪", tint: "#f8e8d6", storeId: "lakshmi" },
+  { id: "toned-milk", name: "Toned milk", size: "500 ml", price: 28, mrp: 29, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "buffalo-milk", name: "Buffalo milk", size: "500 ml", price: 38, mrp: 42, emoji: "🐃", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "desi-eggs", name: "Desi country eggs", size: "6 pcs", price: 72, mrp: 80, emoji: "🥚", tint: "#fdf0cf", storeId: "lakshmi" },
+  { id: "egg-tray", name: "Farm eggs tray", size: "30 pcs", price: 210, mrp: 240, emoji: "🥚", tint: "#fdf0cf", storeId: "sairam" },
+  { id: "curd", name: "Fresh curd", size: "400 g", price: 35, mrp: 38, emoji: "🥣", tint: "#eef3fb", storeId: "lakshmi" },
+  { id: "buttermilk", name: "Masala buttermilk", size: "500 ml", price: 15, mrp: 15, emoji: "🥤", tint: "#e3f4e1", storeId: "lakshmi" },
+  { id: "malai-paneer", name: "Malai paneer", size: "500 g", price: 185, mrp: 210, emoji: "🧀", tint: "#fff3c4", storeId: "sairam" },
+  { id: "butter", name: "Salted butter", size: "100 g", price: 58, mrp: 60, emoji: "🧈", tint: "#fff3c4", storeId: "lakshmi" },
+  { id: "ghee", name: "Pure cow ghee", size: "500 ml", price: 340, mrp: 375, emoji: "🍯", tint: "#fdf0cf", storeId: "sairam" },
+  { id: "cheese", name: "Cheese slices", size: "200 g", price: 145, mrp: 160, emoji: "🧀", tint: "#fff3c4", storeId: "lakshmi" },
 ];
+
+/** The products shown in "Popular in your neighbourhood" on the landing page. */
+export const popularIds = [
+  "milk", "eggs", "bread", "tomato", "onion", "banana", "atta", "toor", "chai", "paneer", "mustard", "biscuits",
+];
+
+export type Subcategory = {
+  slug: string;
+  name: string;
+  emoji: string;
+  /** Optional photo for the aisle rail, otherwise the emoji. */
+  image?: string;
+};
+
+/** Shelves inside an aisle, shown as the left rail on the aisle page. Aisles without an entry show one "All" shelf. */
+export const subcategories: Record<string, Subcategory[]> = {
+  "dairy-eggs": [
+    { slug: "milk", name: "Milk", emoji: "🥛",
+      image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792823017/milkglass_arp4nq.png" },
+    { slug: "eggs", name: "Eggs", emoji: "🥚",
+      image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792847577/egg_jo18rf.png" },
+    { slug: "curd", name: "Curd & buttermilk", emoji: "🥣" },
+    { slug: "paneer", name: "Paneer", emoji: "🧊" },
+    { slug: "butter-ghee", name: "Butter & ghee", emoji: "🧈" },
+    { slug: "cheese", name: "Cheese", emoji: "🧀" },
+  ],
+  "fruits-veg": [
+    { slug: "vegetables", name: "Vegetables", emoji: "🍅",
+      image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792847204/tomato_mgk66d.png" },
+    { slug: "fruits", name: "Fruits", emoji: "🍌" },
+  ],
+  "atta-rice-dal": [
+    { slug: "atta", name: "Atta", emoji: "🌾" },
+    { slug: "dal", name: "Dal & pulses", emoji: "🥜" },
+  ],
+};
 
 export type ProductDetails = {
   category: string;
+  /** Shelf slug from `subcategories[category]`, when the aisle has shelves. */
+  subcategory?: string;
   description: string;
   highlights: string[];
 };
@@ -149,12 +197,14 @@ export type ProductDetails = {
 const productDetails: Record<string, ProductDetails> = {
   milk: {
     category: "dairy-eggs",
+    subcategory: "milk",
     description:
       "Pasteurised full cream milk, delivered cold from the shop fridge. Good for chai, curd and the kids' glass at night.",
     highlights: ["6% fat", "Keep refrigerated", "Use within 2 days of delivery"],
   },
   eggs: {
     category: "dairy-eggs",
+    subcategory: "eggs",
     description: "Brown farm eggs, checked by the shop before packing. Six to a tray.",
     highlights: ["6 eggs per tray", "Packed in a protective tray", "Best within 10 days"],
   },
@@ -165,27 +215,32 @@ const productDetails: Record<string, ProductDetails> = {
   },
   tomato: {
     category: "fruits-veg",
+    subcategory: "vegetables",
     description: "Firm, ripe local tomatoes picked this morning. Ready for sabzi, chutney or salad.",
     highlights: ["Picked this morning", "Sold by weight, about 500 g", "Store in a cool place"],
   },
   onion: {
     category: "fruits-veg",
+    subcategory: "vegetables",
     description: "Dry red onions, sorted for size. A kitchen staple that keeps well.",
     highlights: ["1 kg pack", "Sorted by hand", "Lasts 3 to 4 weeks"],
   },
   banana: {
     category: "fruits-veg",
+    subcategory: "fruits",
     description: "Robusta bananas, ripe and ready to eat. Six in a bunch.",
     highlights: ["6 pieces", "Ripe today", "Store at room temperature"],
   },
   atta: {
     category: "atta-rice-dal",
+    subcategory: "atta",
     description:
       "Stone-ground sharbati wheat atta that makes soft rotis. A 5 kg bag is enough for a family of four for about three weeks.",
     highlights: ["5 kg bag", "100% whole wheat", "Best within 3 months"],
   },
   toor: {
     category: "atta-rice-dal",
+    subcategory: "dal",
     description: "Polished toor dal, cleaned and sorted. Cooks evenly for everyday dal and sambar.",
     highlights: ["1 kg pack", "Cleaned and sorted", "Store in a dry jar"],
   },
@@ -196,6 +251,7 @@ const productDetails: Record<string, ProductDetails> = {
   },
   paneer: {
     category: "dairy-eggs",
+    subcategory: "paneer",
     description: "Soft fresh paneer made this morning. Cut it into cubes for curries or grill it as is.",
     highlights: ["200 g block", "Made fresh daily", "Use within 2 days"],
   },
@@ -208,6 +264,66 @@ const productDetails: Record<string, ProductDetails> = {
     category: "snacks",
     description: "Crisp glucose biscuits for chai time. A packet that disappears fast.",
     highlights: ["300 g pack", "Sealed packet", "Best within 4 months"],
+  },
+  "toned-milk": {
+    category: "dairy-eggs",
+    subcategory: "milk",
+    description: "Lighter toned milk for everyday chai and coffee. Delivered cold from the shop fridge.",
+    highlights: ["3% fat", "Keep refrigerated", "Use within 2 days of delivery"],
+  },
+  "buffalo-milk": {
+    category: "dairy-eggs",
+    subcategory: "milk",
+    description: "Thick buffalo milk from a dairy outside Palakollu. Sets firm curd and makes rich sweets.",
+    highlights: ["6.5% fat", "Collected this morning", "Boil before use"],
+  },
+  "desi-eggs": {
+    category: "dairy-eggs",
+    subcategory: "eggs",
+    description: "Small country hen eggs with deep yellow yolks. Six to a tray.",
+    highlights: ["6 eggs per tray", "Free-range hens", "Best within 10 days"],
+  },
+  "egg-tray": {
+    category: "dairy-eggs",
+    subcategory: "eggs",
+    description: "A full tray of white farm eggs for big families and weekend baking.",
+    highlights: ["30 eggs", "Checked before packing", "Best within 10 days"],
+  },
+  curd: {
+    category: "dairy-eggs",
+    subcategory: "curd",
+    description: "Thick curd set overnight at the shop. Good with rice, in raita or as is.",
+    highlights: ["400 g cup", "Set overnight", "Use within 2 days"],
+  },
+  buttermilk: {
+    category: "dairy-eggs",
+    subcategory: "curd",
+    description: "Chilled majjiga with ginger, green chilli and curry leaves. Best on a hot afternoon.",
+    highlights: ["500 ml pouch", "Spiced with ginger and chilli", "Keep refrigerated"],
+  },
+  "malai-paneer": {
+    category: "dairy-eggs",
+    subcategory: "paneer",
+    description: "Soft, creamy paneer in a bigger block for curries and parties.",
+    highlights: ["500 g block", "Made fresh daily", "Use within 2 days"],
+  },
+  butter: {
+    category: "dairy-eggs",
+    subcategory: "butter-ghee",
+    description: "Salted table butter for toast, parathas and pav bhaji.",
+    highlights: ["100 g pack", "Keep refrigerated", "Best within 3 months"],
+  },
+  ghee: {
+    category: "dairy-eggs",
+    subcategory: "butter-ghee",
+    description: "Pure cow ghee with a grainy texture and a strong aroma. A spoon on hot rice is enough.",
+    highlights: ["500 ml jar", "Made from cow milk", "Best within 9 months"],
+  },
+  cheese: {
+    category: "dairy-eggs",
+    subcategory: "cheese",
+    description: "Processed cheese slices for sandwiches and burgers. Ten slices in a pack.",
+    highlights: ["200 g, 10 slices", "Keep refrigerated", "Best within 6 months"],
   },
 };
 
@@ -255,6 +371,11 @@ const productIndex = new Map(products.map((p) => [p.id, p]));
 
 export function getProduct(id: string): Product | undefined {
   return productIndex.get(id);
+}
+
+/** Every product in an aisle, in catalogue order. */
+export function getAisleProducts(slug: string): Product[] {
+  return products.filter((p) => productDetails[p.id]?.category === slug);
 }
 
 export function getStore(id: string): Store | undefined {

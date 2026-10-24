@@ -7,35 +7,21 @@ import { Plus } from "lucide-react";
 import { Stepper } from "@/components/landing/cart-sheet";
 import { SectionHeading } from "@/components/landing/section-heading";
 import { TiltCard } from "@/components/motion/tilt-card";
+import { aisleTheme, allTheme, type Theme } from "@/lib/aisle-theme";
 import {
   formatPrice,
   getCategory,
   getProductDetails,
   getStore,
+  popularIds,
   products,
   type Product,
 } from "@/lib/mock-data";
 import { useCart } from "@/store/cart";
 import { useFly } from "@/store/fly";
 
-type Theme = { from: string; to: string; dark: boolean; soft: string };
-
-// One bold two-tone gradient per aisle. Dark themes carry white text, light ones teal.
-// `soft` is the resting tint for the aisle's filter chip.
-const themes: Record<string, Theme> = {
-  "dairy-eggs": { from: "#efe8ff", to: "#cdb8ff", dark: false, soft: "#efe8ff" },
-  "fruits-veg": { from: "#d6f9e8", to: "#3ddc97", dark: false, soft: "#d6f9e8" },
-  bakery: { from: "#ffe6c2", to: "#ff9f1c", dark: false, soft: "#ffe6c2" },
-  "atta-rice-dal": { from: "#fff3c4", to: "#ffc93c", dark: false, soft: "#fff3c4" },
-  "tea-coffee": { from: "#2fa56f", to: "#11724a", dark: true, soft: "#d3efe1" },
-  "masala-oil": { from: "#ff6b9b", to: "#e11d63", dark: true, soft: "#ffd9e6" },
-  snacks: { from: "#ffd2bd", to: "#ff7a45", dark: false, soft: "#ffe3d6" },
-};
-const fallback: Theme = { from: "#ffffff", to: "#e2f1ea", dark: false, soft: "#e2f1ea" };
-const allTheme: Theme = { from: "#1d5a5b", to: "#0b3b3c", dark: true, soft: "#dff2ea" };
-
 function themeFor(product: Product): Theme {
-  return themes[getProductDetails(product.id)?.category ?? ""] ?? fallback;
+  return aisleTheme(getProductDetails(product.id)?.category ?? "");
 }
 
 export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
@@ -149,15 +135,16 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
   );
 }
 
-const aisleSlugs = [...new Set(products.map((p) => getProductDetails(p.id)?.category).filter(Boolean))] as string[];
+const popular = popularIds.flatMap((id) => products.find((p) => p.id === id) ?? []);
+const aisleSlugs = [...new Set(popular.map((p) => getProductDetails(p.id)?.category).filter(Boolean))] as string[];
 const filters = [
-  { slug: "all", name: "All", emoji: "🧺", count: products.length, theme: allTheme },
+  { slug: "all", name: "All", emoji: "🧺", count: popular.length, theme: allTheme },
   ...aisleSlugs.map((slug) => ({
     slug,
     name: getCategory(slug)?.name ?? slug,
     emoji: getCategory(slug)?.emoji ?? "🛒",
-    count: products.filter((p) => getProductDetails(p.id)?.category === slug).length,
-    theme: themes[slug] ?? fallback,
+    count: popular.filter((p) => getProductDetails(p.id)?.category === slug).length,
+    theme: aisleTheme(slug),
   })),
 ];
 
@@ -253,7 +240,7 @@ function AisleFilter({ active, onChange }: { active: string; onChange: (slug: st
 
 export function ProductGrid() {
   const [active, setActive] = useState("all");
-  const visible = active === "all" ? products : products.filter((p) => getProductDetails(p.id)?.category === active);
+  const visible = active === "all" ? popular : popular.filter((p) => getProductDetails(p.id)?.category === active);
 
   return (
     <section id="fresh" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-14 sm:px-6 lg:px-8 lg:pt-20">

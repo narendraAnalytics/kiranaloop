@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SectionHeading } from "@/components/landing/section-heading";
 import { RevealItem, RevealList } from "@/components/motion/reveal";
 import { categories } from "@/lib/mock-data";
@@ -17,8 +18,8 @@ export function Categories() {
       >
         {categories.map((c) => (
           <RevealItem key={c.slug} className="w-28 shrink-0 snap-start sm:w-auto">
-            <a
-              href={`#${c.slug}`}
+            <Link
+              href={`/aisle/${c.slug}`}
               className="group flex flex-col gap-2 rounded-[1.75rem] outline-none focus-visible:ring-2 focus-visible:ring-ink"
             >
               <span
@@ -42,7 +43,7 @@ export function Categories() {
                 )}
               </span>
               <span className="px-1 text-center text-[0.82rem] font-bold leading-tight text-ink">{c.name}</span>
-            </a>
+            </Link>
           </RevealItem>
         ))}
       </RevealList>
