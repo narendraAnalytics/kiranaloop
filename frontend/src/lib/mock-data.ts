@@ -16,6 +16,8 @@ export type Product = {
   emoji: string;
   tint: string;
   storeId: string;
+  /** Optional photo shown instead of the emoji on the usual-basket card. */
+  image?: string;
 };
 
 export type Store = {
@@ -41,15 +43,26 @@ export type Store = {
 export const categories: Category[] = [
   { slug: "fruits-veg", name: "Fruits & veg", emoji: "🥬", tint: "#e3f4e1",
     image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792766855/fruitsandveg_qvjghr.png" },
-  { slug: "dairy-eggs", name: "Dairy & eggs", emoji: "🥛", tint: "#e4eefb" },
-  { slug: "atta-rice-dal", name: "Atta, rice & dal", emoji: "🌾", tint: "#fdf0cf" },
-  { slug: "masala-oil", name: "Masala & oil", emoji: "🌶️", tint: "#fde3dd" },
-  { slug: "snacks", name: "Snacks", emoji: "🍪", tint: "#f8e8d6" },
-  { slug: "tea-coffee", name: "Tea & coffee", emoji: "☕", tint: "#eadfd5" },
-  { slug: "bakery", name: "Bread & bakery", emoji: "🍞", tint: "#fbeccf" },
-  { slug: "cleaning", name: "Cleaning", emoji: "🧴", tint: "#dff3f4" },
-  { slug: "personal-care", name: "Personal care", emoji: "🧼", tint: "#efe4f6" },
-  { slug: "baby-pets", name: "Baby & pets", emoji: "🍼", tint: "#fce4ee" },
+  { slug: "dairy-eggs", name: "Dairy & eggs", emoji: "🥛", tint: "#e4eefb",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792821133/dairy_eggs_mixv0y.png" },
+  { slug: "atta-rice-dal", name: "Atta, rice & dal", emoji: "🌾", tint: "#fdf0cf",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792820904/attarice_dal_lbcmwe.png" },
+  { slug: "masala-oil", name: "Masala & oil", emoji: "🌶️", tint: "#fde3dd",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792820696/masala_oil_bhgazw.png" },
+  { slug: "snacks", name: "Snacks", emoji: "🍪", tint: "#f8e8d6",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792820477/snacks_wg177k.png" },
+  { slug: "tea-coffee", name: "Tea & coffee", emoji: "☕", tint: "#eadfd5",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792820175/teaandCoffee_b03e4s.png" },
+  { slug: "bakery", name: "Bread & bakery", emoji: "🍞", tint: "#fbeccf",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792823236/breadandbakery_wjsxra.png" },
+  { slug: "cleaning", name: "Cleaning", emoji: "🧴", tint: "#dff3f4",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792823425/cleaning_rknl6v.png" },
+  { slug: "personal-care", name: "Personal care", emoji: "🧼", tint: "#efe4f6",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792769988/PersonaCare_saukt6.png" },
+  { slug: "baby-care", name: "Baby care", emoji: "🍼", tint: "#fce4ee",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792821481/babycare_d8wcqb.png" },
+  { slug: "pets", name: "Pets", emoji: "🐶", tint: "#fdeccd",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792821603/pets_t4os7e.png" },
 ];
 
 export const stores: Store[] = [
@@ -107,7 +120,8 @@ export const stores: Store[] = [
 ];
 
 export const products: Product[] = [
-  { id: "milk", name: "Full cream milk", size: "500 ml", price: 33, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "milk", name: "Full cream milk", size: "500 ml", price: 33, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792823017/milkglass_arp4nq.png" },
   { id: "eggs", name: "Farm eggs", size: "6 pcs", price: 54, mrp: 60, emoji: "🥚", tint: "#fdf0cf", storeId: "lakshmi" },
   { id: "bread", name: "Brown bread", size: "400 g", price: 45, mrp: 50, emoji: "🍞", tint: "#fbeccf", storeId: "lakshmi" },
   { id: "tomato", name: "Local tomato", size: "500 g", price: 22, mrp: 28, emoji: "🍅", tint: "#fde3dd", storeId: "venkata" },

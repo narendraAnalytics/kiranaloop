@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, RotateCcw, Sparkles } from "lucide-react";
 import { toast } from "sonner";
@@ -140,17 +141,32 @@ export function UsualBasket() {
                       max={big ? 6 : 10}
                       animate={{ opacity: on ? 1 : 0.5, scale: on ? 1 : 0.95, filter: on ? "saturate(1)" : "saturate(0.25)" }}
                       transition={{ duration: 0.25 }}
-                      className={`flex h-full w-full flex-col rounded-[1.75rem] p-4 text-left outline-none focus-visible:ring-4 focus-visible:ring-ink/40 sm:p-5 ${tone.bg} ${tone.text} ${big ? "min-h-44 sm:min-h-0" : "min-h-44"}`}
+                      className={`relative flex h-full w-full flex-col rounded-[1.75rem] p-4 text-left outline-none focus-visible:ring-4 focus-visible:ring-ink/40 sm:p-5 ${tone.bg} ${tone.text} ${big ? "min-h-44 sm:min-h-0" : "min-h-44"}`}
                     >
-                      <span className="flex items-start justify-between gap-2">
-                        <span
-                          className={`grid place-items-center rounded-full ${tone.bubble} ${big ? "size-20 text-5xl sm:size-28 sm:text-7xl" : "size-14 text-3xl"}`}
-                          aria-hidden
-                        >
-                          <span className="animate-float inline-block" style={{ animationDelay: `${i * -0.9}s` }}>
-                            {product.emoji}
+                      <span className={`flex items-start gap-2 ${product.image ? "justify-end" : "justify-between"}`}>
+                        {product.image ? (
+                          <span className="pointer-events-none absolute inset-x-6 bottom-28 top-6 grid place-items-center" aria-hidden>
+                            <span className="absolute size-3/5 rounded-full bg-white/45 blur-2xl" />
+                            <span className="animate-float relative block size-full">
+                              <Image
+                                src={product.image.replace("/upload/", "/upload/f_auto,q_auto,w_700/")}
+                                alt=""
+                                fill
+                                sizes="(min-width: 640px) 320px, 90vw"
+                                className="object-contain drop-shadow-[0_18px_20px_rgba(11,59,60,0.25)]"
+                              />
+                            </span>
                           </span>
-                        </span>
+                        ) : (
+                          <span
+                            className={`grid place-items-center rounded-full ${tone.bubble} ${big ? "size-20 text-5xl sm:size-28 sm:text-7xl" : "size-14 text-3xl"}`}
+                            aria-hidden
+                          >
+                            <span className="animate-float inline-block" style={{ animationDelay: `${i * -0.9}s` }}>
+                              {product.emoji}
+                            </span>
+                          </span>
+                        )}
                         <span
                           className={`grid size-7 shrink-0 place-items-center rounded-full border-2 transition-colors ${
                             on ? "border-transparent bg-white text-ink" : "border-current"
