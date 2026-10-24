@@ -4,3 +4,8 @@
 *.md
 *.txt
 !README.md
+
+# skills-installer output in remotionvideo
+remotionvideo/.agents/
+remotionvideo/.claude/
+remotionvideo/skills-lock.json
