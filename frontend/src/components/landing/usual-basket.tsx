@@ -141,13 +141,16 @@ export function UsualBasket() {
                       max={big ? 6 : 10}
                       animate={{ opacity: on ? 1 : 0.5, scale: on ? 1 : 0.95, filter: on ? "saturate(1)" : "saturate(0.25)" }}
                       transition={{ duration: 0.25 }}
-                      className={`relative flex h-full w-full flex-col rounded-[1.75rem] p-4 text-left outline-none focus-visible:ring-4 focus-visible:ring-ink/40 sm:p-5 ${tone.bg} ${tone.text} ${big ? "min-h-44 sm:min-h-0" : "min-h-44"}`}
+                      className={`relative flex h-full w-full flex-col rounded-[1.75rem] p-4 text-left outline-none focus-visible:ring-4 focus-visible:ring-ink/40 sm:p-5 ${tone.bg} ${tone.text} ${big ? "min-h-64 sm:min-h-0" : "min-h-56"}`}
                     >
                       <span className={`flex items-start gap-2 ${product.image ? "justify-end" : "justify-between"}`}>
                         {product.image ? (
-                          <span className="pointer-events-none absolute inset-x-6 bottom-28 top-6 grid place-items-center" aria-hidden>
-                            <span className="absolute size-3/5 rounded-full bg-white/45 blur-2xl" />
-                            <span className="animate-float relative block size-full">
+                          <span
+                            className={`pointer-events-none absolute inset-x-3 top-3 grid place-items-center ${big ? "bottom-24 sm:inset-x-8 sm:bottom-28" : "bottom-[4.75rem] sm:bottom-24"}`}
+                            aria-hidden
+                          >
+                            <span className="absolute aspect-square h-4/5 rounded-full bg-white/50 blur-xl" />
+                            <span className="animate-float relative block size-full" style={{ animationDelay: `${i * -0.9}s` }}>
                               <Image
                                 src={product.image.replace("/upload/", "/upload/f_auto,q_auto,w_700/")}
                                 alt=""
