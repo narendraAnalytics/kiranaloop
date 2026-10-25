@@ -185,6 +185,12 @@ export const products: Product[] = [
   { id: "ghee-heritage", brand: "Heritage", name: "Heritage cow ghee", size: "500 ml", price: 349, mrp: 380, emoji: "🍯", tint: "#fdf0cf", storeId: "sairam" },
   { id: "cheese-amul", brand: "Amul", name: "Amul processed cheese slices", size: "200 g", price: 150, mrp: 165, emoji: "🧀", tint: "#fff3c4", storeId: "lakshmi" },
   { id: "cheese-britannia", brand: "Britannia", name: "Britannia cheese slices", size: "200 g", price: 142, mrp: 155, emoji: "🧀", tint: "#fff3c4", storeId: "lakshmi" },
+  { id: "curd-amul-masti-buttermilk", brand: "Amul", name: "Amul Masti spiced buttermilk", size: "200 ml", price: 15, mrp: 15, emoji: "🥤", tint: "#e3f4e1", storeId: "lakshmi",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792937769/Amul_Masti_Spiced_Buttermilk_aezv6b.png" },
+  { id: "ghee-amul-golden", brand: "Amul", name: "Amul cow ghee golden", size: "500 ml", price: 340, mrp: 350, emoji: "🍯", tint: "#fdf0cf", storeId: "sairam",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792937198/Amul_Cow_Ghee_Golden_rf2km5.png" },
+  { id: "cheese-amul-diced", brand: "Amul", name: "Amul diced cheese", size: "200 g", price: 120, mrp: 120, emoji: "🧀", tint: "#fff3c4", storeId: "lakshmi",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792937481/Amul_Diced_Cheese_dntkrn.png" },
 ];
 
 /** The products shown in "Popular in your neighbourhood" on the landing page. */
@@ -277,7 +283,19 @@ function brandedDetails(): Record<string, ProductDetails> {
       description: "Salted table butter for toast, parathas and pav bhaji.",
       highlights: ["100 g pack", "Keep refrigerated", "Best within 6 months"],
     }),
-    ...family(["ghee-amul", "ghee-heritage"], {
+    ...family(["curd-amul-masti-buttermilk"], {
+      category: "dairy-eggs",
+      subcategory: "curd",
+      description: "Spiced buttermilk with cumin and curry leaf, ready to drink chilled.",
+      highlights: ["200 ml tetra pack", "Serve chilled", "Best within 3 months unopened"],
+    }),
+    ...family(["cheese-amul-diced"], {
+      category: "dairy-eggs",
+      subcategory: "cheese",
+      description: "Diced cheese blend, ready for pizza, pasta and sandwiches.",
+      highlights: ["200 g pouch", "Keep refrigerated", "Best within 6 months"],
+    }),
+    ...family(["ghee-amul", "ghee-amul-golden", "ghee-heritage"], {
       category: "dairy-eggs",
       subcategory: "butter-ghee",
       description: "Cow ghee with a rich aroma. A spoon on hot rice is enough.",
