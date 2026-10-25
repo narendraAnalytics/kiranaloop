@@ -150,7 +150,13 @@ export function UsualBasket() {
                             aria-hidden
                           >
                             <span className="absolute aspect-square h-4/5 rounded-full bg-white/50 blur-xl" />
-                            <span className="animate-float relative block size-full" style={{ animationDelay: `${i * -0.9}s` }}>
+                            {big && (
+                              <span className="absolute aspect-square h-[88%] rounded-full border border-white/50 bg-gradient-to-br from-white/60 to-white/10 shadow-[inset_0_0_40px_rgba(255,255,255,0.5)]" />
+                            )}
+                            <span
+                              className={`animate-float relative block size-full ${big ? "scale-95 -rotate-3" : ""}`}
+                              style={{ animationDelay: `${i * -0.9}s` }}
+                            >
                               <Image
                                 src={product.image.replace("/upload/", "/upload/f_auto,q_auto,w_700/")}
                                 alt=""

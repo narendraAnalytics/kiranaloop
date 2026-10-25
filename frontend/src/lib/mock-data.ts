@@ -123,7 +123,7 @@ export const stores: Store[] = [
 
 export const products: Product[] = [
   { id: "milk", name: "Full cream milk", size: "500 ml", price: 33, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi",
-    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792823017/milkglass_arp4nq.png" },
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792935688/Amul_Gold_Full_Cream_Milk_aryydk.png" },
   { id: "eggs", name: "Farm eggs", size: "6 pcs", price: 54, mrp: 60, emoji: "🥚", tint: "#fdf0cf", storeId: "lakshmi",
     image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792847577/egg_jo18rf.png" },
   { id: "bread", name: "Brown bread", size: "400 g", price: 45, mrp: 50, emoji: "🍞", tint: "#fbeccf", storeId: "lakshmi",
@@ -156,8 +156,16 @@ export const products: Product[] = [
   { id: "milk-heritage", brand: "Heritage", name: "Heritage toned milk", size: "500 ml", price: 32, mrp: 32, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
   { id: "milk-vijaya", brand: "Vijaya", name: "Vijaya toned milk", size: "500 ml", price: 29, mrp: 30, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
   { id: "milk-dodla", brand: "Dodla", name: "Dodla full cream milk", size: "500 ml", price: 33, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
-  { id: "milk-amul-gold", brand: "Amul", name: "Amul Gold full cream milk", size: "500 ml", price: 34, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
-  { id: "milk-amul-taaza", brand: "Amul", name: "Amul Taaza toned milk", size: "500 ml", price: 28, mrp: 28, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "milk-amul-gold", brand: "Amul", name: "Amul Gold full cream milk", size: "500 ml", price: 34, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792935688/Amul_Gold_Milk_ddrpym.png" },
+  { id: "milk-amul-taaza", brand: "Amul", name: "Amul Taaza toned milk", size: "500 ml", price: 28, mrp: 28, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/e_background_removal/v1792935688/Amul_Taaza_Toned_Milk_bsvbet.png" },
+  { id: "milk-amul-taaza-homo", brand: "Amul", name: "Amul Taaza homogenised toned milk", size: "500 ml", price: 29, mrp: 29, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792935689/Amul_Taaza_Homogenised_Toned_Milk_yvg49e.png" },
+  { id: "milk-amul-buffalo-a2", brand: "Amul", name: "Amul buffalo milk A2", size: "500 ml", price: 42, mrp: 42, emoji: "🐃", tint: "#e4eefb", storeId: "lakshmi",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792935689/Amul_Buffalo_Milk_A2_cuj0ll.png" },
+  { id: "milk-amul-lactose-free", brand: "Amul", name: "Amul lactose-free milk", size: "500 ml", price: 45, mrp: 45, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi",
+    image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792935689/Amul_Lactose-Free_Milk_xmi53p.png" },
   { id: "milk-mother-dairy", brand: "Mother Dairy", name: "Mother Dairy full cream milk", size: "500 ml", price: 36, mrp: 37, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
   { id: "eggs-suguna", brand: "Suguna", name: "Suguna farm eggs", size: "6 pcs", price: 58, mrp: 66, emoji: "🥚", tint: "#fdf0cf", storeId: "lakshmi" },
   { id: "eggs-keggs", brand: "Keggs", name: "Keggs farm fresh eggs", size: "6 pcs", price: 68, mrp: 78, emoji: "🥚", tint: "#fdf0cf", storeId: "lakshmi" },
@@ -196,7 +204,7 @@ export type Subcategory = {
 export const subcategories: Record<string, Subcategory[]> = {
   "dairy-eggs": [
     { slug: "milk", name: "Milk", emoji: "🥛",
-      image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792823017/milkglass_arp4nq.png" },
+      image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792935688/Amul_Gold_Full_Cream_Milk_aryydk.png" },
     { slug: "eggs", name: "Eggs", emoji: "🥚",
       image: "https://res.cloudinary.com/dkqbzwicr/image/upload/v1792847577/egg_jo18rf.png" },
     { slug: "curd", name: "Curd & buttermilk", emoji: "🥣" },
@@ -232,7 +240,7 @@ function brandedDetails(): Record<string, ProductDetails> {
 
   return {
     ...family(
-      ["milk-heritage", "milk-vijaya", "milk-dodla", "milk-amul-gold", "milk-amul-taaza", "milk-mother-dairy"],
+      ["milk-heritage", "milk-vijaya", "milk-dodla", "milk-amul-gold", "milk-amul-taaza", "milk-amul-taaza-homo", "milk-amul-buffalo-a2", "milk-amul-lactose-free", "milk-mother-dairy"],
       {
         category: "dairy-eggs",
         subcategory: "milk",
