@@ -54,11 +54,18 @@ export function AisleView({ slug, emoji, image }: { slug: string; emoji: string;
   const [active, setActive] = useState("all");
   const [sort, setSort] = useState<SortId>("relevance");
   const gridTop = useRef<HTMLDivElement>(null);
+  const [brand, setBrand] = useState("all");
   const shelf = shelves.find((s) => s.slug === active) ?? shelves[0];
-  const visible = sortProducts(shelf.items, sort);
+  const brands = [...new Set(shelf.items.flatMap((p) => p.brand ?? []))];
+  const activeBrand = brands.includes(brand) ? brand : "all";
+  const visible = sortProducts(
+    activeBrand === "all" ? shelf.items : shelf.items.filter((p) => p.brand === activeBrand),
+    sort,
+  );
 
   function pick(next: string) {
     setActive(next);
+    setBrand("all");
     // Bring the new shelf's first row into view if the shopper had scrolled down the old one.
     const top = gridTop.current?.getBoundingClientRect().top ?? 0;
     if (top < 0) gridTop.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -101,6 +108,27 @@ export function AisleView({ slug, emoji, image }: { slug: string; emoji: string;
             </select>
           </label>
         </div>
+
+        {brands.length > 1 && (
+          <div role="group" aria-label="Filter by brand" className="-mx-1 mt-3 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none]">
+            {["all", ...brands].map((b) => {
+              const on = b === activeBrand;
+              return (
+                <button
+                  key={b}
+                  type="button"
+                  aria-pressed={on}
+                  onClick={() => setBrand(b)}
+                  className={`h-11 shrink-0 rounded-full px-4 text-sm font-bold outline-none ring-1 transition-colors focus-visible:ring-2 focus-visible:ring-ink ${
+                    on ? "bg-ink text-white ring-ink" : "bg-white/70 text-ink ring-ink/10 hover:bg-white"
+                  }`}
+                >
+                  {b === "all" ? "All brands" : b}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         <motion.ul layout className="mt-3 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4">
           <AnimatePresence mode="popLayout" initial={false}>
@@ -231,7 +259,12 @@ function AisleCard({ product, index, theme }: { product: Product; index: number;
               <span className="font-semibold text-ink/55"> · {store?.short}</span>
             </span>
           </p>
-          <h3 className="mt-1.5 line-clamp-2 min-h-[2.5em] font-sans text-[13px] font-bold leading-tight sm:text-sm">
+          {product.brand && (
+            <p className="mt-1.5 truncate text-[10px] font-black uppercase tracking-wider text-rani sm:text-[11px]">
+              {product.brand}
+            </p>
+          )}
+          <h3 className={`${product.brand ? "mt-0.5" : "mt-1.5"} line-clamp-2 min-h-[2.5em] font-sans text-[13px] font-bold leading-tight sm:text-sm`}>
             <Link
               href={`/product/${product.id}`}
               className="rounded outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ink"

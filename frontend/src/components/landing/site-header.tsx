@@ -19,6 +19,7 @@ export function Logo({ className = "", tone = "ink" }: { className?: string; ton
         width={53}
         height={48}
         sizes="53px"
+        preload
         className="-my-1 h-12 w-auto shrink-0 drop-shadow-[0_4px_8px_rgba(19,138,85,0.35)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"
       />
       <span

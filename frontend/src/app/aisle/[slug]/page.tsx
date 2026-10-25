@@ -9,6 +9,9 @@ import { categories, getAisleProducts, getCategory, getStore, type Store } from 
 
 type Props = { params: Promise<{ slug: string }> };
 
+/** Every slug is prerendered by generateStaticParams; let the route block rather than stream. */
+export const instant = false;
+
 export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }));
 }

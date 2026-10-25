@@ -16,6 +16,8 @@ export type Product = {
   emoji: string;
   tint: string;
   storeId: string;
+  /** Company that makes it, for the brand chips on the aisle page. Shop-made items have none. */
+  brand?: string;
   /** Optional photo shown instead of the emoji on the usual-basket card. */
   image?: string;
 };
@@ -148,6 +150,33 @@ export const products: Product[] = [
   { id: "butter", name: "Salted butter", size: "100 g", price: 58, mrp: 60, emoji: "🧈", tint: "#fff3c4", storeId: "lakshmi" },
   { id: "ghee", name: "Pure cow ghee", size: "500 ml", price: 340, mrp: 375, emoji: "🍯", tint: "#fdf0cf", storeId: "sairam" },
   { id: "cheese", name: "Cheese slices", size: "200 g", price: 145, mrp: 160, emoji: "🧀", tint: "#fff3c4", storeId: "lakshmi" },
+
+  // Branded packs: one product per company, each with its own price. Checked against web listings in Oct 2026:
+  // Amul Gold/Taaza and Heritage milk, Eggoz eggs, Amul paneer, butter and ghee. The other brands are estimates.
+  { id: "milk-heritage", brand: "Heritage", name: "Heritage toned milk", size: "500 ml", price: 32, mrp: 32, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "milk-vijaya", brand: "Vijaya", name: "Vijaya toned milk", size: "500 ml", price: 29, mrp: 30, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "milk-dodla", brand: "Dodla", name: "Dodla full cream milk", size: "500 ml", price: 33, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "milk-amul-gold", brand: "Amul", name: "Amul Gold full cream milk", size: "500 ml", price: 34, mrp: 34, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "milk-amul-taaza", brand: "Amul", name: "Amul Taaza toned milk", size: "500 ml", price: 28, mrp: 28, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "milk-mother-dairy", brand: "Mother Dairy", name: "Mother Dairy full cream milk", size: "500 ml", price: 36, mrp: 37, emoji: "🥛", tint: "#e4eefb", storeId: "lakshmi" },
+  { id: "eggs-suguna", brand: "Suguna", name: "Suguna farm eggs", size: "6 pcs", price: 58, mrp: 66, emoji: "🥚", tint: "#fdf0cf", storeId: "lakshmi" },
+  { id: "eggs-keggs", brand: "Keggs", name: "Keggs farm fresh eggs", size: "6 pcs", price: 68, mrp: 78, emoji: "🥚", tint: "#fdf0cf", storeId: "lakshmi" },
+  { id: "eggs-eggoz", brand: "Eggoz", name: "Eggoz farm fresh white eggs", size: "6 pcs", price: 67, mrp: 74, emoji: "🥚", tint: "#fdf0cf", storeId: "lakshmi" },
+  { id: "bread-modern", brand: "Modern", name: "Modern brown bread", size: "400 g", price: 50, mrp: 55, emoji: "🍞", tint: "#fbeccf", storeId: "lakshmi" },
+  { id: "bread-britannia", brand: "Britannia", name: "Britannia brown bread", size: "400 g", price: 55, mrp: 60, emoji: "🍞", tint: "#fbeccf", storeId: "lakshmi" },
+  { id: "bread-harvest", brand: "Harvest Gold", name: "Harvest Gold white bread", size: "400 g", price: 42, mrp: 45, emoji: "🍞", tint: "#fbeccf", storeId: "lakshmi" },
+  { id: "bread-english-oven", brand: "English Oven", name: "English Oven sandwich bread", size: "400 g", price: 60, mrp: 65, emoji: "🍞", tint: "#fbeccf", storeId: "lakshmi" },
+  { id: "curd-heritage", brand: "Heritage", name: "Heritage fresh curd", size: "400 g", price: 36, mrp: 38, emoji: "🥣", tint: "#eef3fb", storeId: "lakshmi" },
+  { id: "curd-amul", brand: "Amul", name: "Amul Masti dahi", size: "400 g", price: 35, mrp: 38, emoji: "🥣", tint: "#eef3fb", storeId: "lakshmi" },
+  { id: "curd-mother-dairy", brand: "Mother Dairy", name: "Mother Dairy classic curd", size: "400 g", price: 38, mrp: 40, emoji: "🥣", tint: "#eef3fb", storeId: "lakshmi" },
+  { id: "paneer-amul", brand: "Amul", name: "Amul fresh paneer", size: "200 g", price: 76, mrp: 76, emoji: "🧊", tint: "#fff3c4", storeId: "lakshmi" },
+  { id: "paneer-mother-dairy", brand: "Mother Dairy", name: "Mother Dairy paneer", size: "200 g", price: 92, mrp: 98, emoji: "🧊", tint: "#fff3c4", storeId: "lakshmi" },
+  { id: "butter-amul", brand: "Amul", name: "Amul salted butter", size: "100 g", price: 58, mrp: 58, emoji: "🧈", tint: "#fff3c4", storeId: "lakshmi" },
+  { id: "butter-mother-dairy", brand: "Mother Dairy", name: "Mother Dairy butter", size: "100 g", price: 58, mrp: 60, emoji: "🧈", tint: "#fff3c4", storeId: "lakshmi" },
+  { id: "ghee-amul", brand: "Amul", name: "Amul cow ghee", size: "500 ml", price: 310, mrp: 310, emoji: "🍯", tint: "#fdf0cf", storeId: "sairam" },
+  { id: "ghee-heritage", brand: "Heritage", name: "Heritage cow ghee", size: "500 ml", price: 349, mrp: 380, emoji: "🍯", tint: "#fdf0cf", storeId: "sairam" },
+  { id: "cheese-amul", brand: "Amul", name: "Amul processed cheese slices", size: "200 g", price: 150, mrp: 165, emoji: "🧀", tint: "#fff3c4", storeId: "lakshmi" },
+  { id: "cheese-britannia", brand: "Britannia", name: "Britannia cheese slices", size: "200 g", price: 142, mrp: 155, emoji: "🧀", tint: "#fff3c4", storeId: "lakshmi" },
 ];
 
 /** The products shown in "Popular in your neighbourhood" on the landing page. */
@@ -193,6 +222,67 @@ export type ProductDetails = {
   description: string;
   highlights: string[];
 };
+
+/** Details for the branded packs. Every pack in a family shares a shelf and a short description. */
+function brandedDetails(): Record<string, ProductDetails> {
+  const family = (
+    ids: string[],
+    base: Pick<ProductDetails, "category" | "subcategory" | "description" | "highlights">,
+  ) => Object.fromEntries(ids.map((id) => [id, base]));
+
+  return {
+    ...family(
+      ["milk-heritage", "milk-vijaya", "milk-dodla", "milk-amul-gold", "milk-amul-taaza", "milk-mother-dairy"],
+      {
+        category: "dairy-eggs",
+        subcategory: "milk",
+        description: "Pasteurised packet milk from a trusted dairy, delivered cold from the shop fridge.",
+        highlights: ["500 ml pouch", "Keep refrigerated", "Use within 2 days of delivery"],
+      },
+    ),
+    ...family(["eggs-suguna", "eggs-keggs", "eggs-eggoz"], {
+      category: "dairy-eggs",
+      subcategory: "eggs",
+      description: "Branded farm eggs, graded and packed in a tray. Six to a pack.",
+      highlights: ["6 eggs per tray", "Graded by size", "Best within 10 days"],
+    }),
+    ...family(["bread-modern", "bread-britannia", "bread-harvest", "bread-english-oven"], {
+      category: "bakery",
+      description: "Sliced packaged bread from a bakery brand, in a sealed wrapper.",
+      highlights: ["400 g loaf", "Sealed wrapper", "Best within 4 days"],
+    }),
+    ...family(["curd-heritage", "curd-amul", "curd-mother-dairy"], {
+      category: "dairy-eggs",
+      subcategory: "curd",
+      description: "Thick set curd in a cup. Good with rice, in raita or as is.",
+      highlights: ["400 g cup", "Keep refrigerated", "Use within 5 days"],
+    }),
+    ...family(["paneer-amul", "paneer-mother-dairy"], {
+      category: "dairy-eggs",
+      subcategory: "paneer",
+      description: "Soft packaged paneer for curries, tikka and bhurji.",
+      highlights: ["200 g block", "Keep refrigerated", "Use within 5 days"],
+    }),
+    ...family(["butter-amul", "butter-mother-dairy"], {
+      category: "dairy-eggs",
+      subcategory: "butter-ghee",
+      description: "Salted table butter for toast, parathas and pav bhaji.",
+      highlights: ["100 g pack", "Keep refrigerated", "Best within 6 months"],
+    }),
+    ...family(["ghee-amul", "ghee-heritage"], {
+      category: "dairy-eggs",
+      subcategory: "butter-ghee",
+      description: "Cow ghee with a rich aroma. A spoon on hot rice is enough.",
+      highlights: ["500 ml jar", "Made from cow milk", "Best within 9 months"],
+    }),
+    ...family(["cheese-amul", "cheese-britannia"], {
+      category: "dairy-eggs",
+      subcategory: "cheese",
+      description: "Processed cheese slices for sandwiches and burgers. Ten slices in a pack.",
+      highlights: ["200 g, 10 slices", "Keep refrigerated", "Best within 6 months"],
+    }),
+  };
+}
 
 const productDetails: Record<string, ProductDetails> = {
   milk: {
@@ -325,6 +415,7 @@ const productDetails: Record<string, ProductDetails> = {
     description: "Processed cheese slices for sandwiches and burgers. Ten slices in a pack.",
     highlights: ["200 g, 10 slices", "Keep refrigerated", "Best within 6 months"],
   },
+  ...brandedDetails(),
 };
 
 export function getProductDetails(id: string): ProductDetails | undefined {
