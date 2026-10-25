@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, Clock, MapPin, ShieldCheck, Star, Wallet } from "lucide-react";
@@ -12,6 +13,11 @@ import {
   getStore,
   products,
 } from "@/lib/mock-data";
+
+/** Cloudinary originals are 2 to 3 MB, so ask for a resized copy. */
+function thumb(url: string, w: number) {
+  return url.replace("/upload/", `/upload/f_auto,q_auto,w_${w}/`);
+}
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -44,6 +50,10 @@ export default async function ProductPage({ params }: Props) {
   const sameAisle = products.filter(
     (p) => p.id !== product.id && getProductDetails(p.id)?.category === details?.category,
   );
+  const shelfMates = products.filter((p) => {
+    const d = getProductDetails(p.id);
+    return p.id !== product.id && d && details && d.category === details.category && d.subcategory === details.subcategory;
+  });
   const related = [...sameAisle, ...moreFromStore.filter((p) => !sameAisle.includes(p))].slice(0, 4);
 
   return (
@@ -74,19 +84,51 @@ export default async function ProductPage({ params }: Props) {
         </nav>
 
         <div className="mt-5 grid gap-8 lg:grid-cols-2 lg:gap-14">
-          <div
-            className="relative grid aspect-square place-items-center overflow-hidden rounded-[2rem] text-[9rem] sm:text-[12rem] lg:sticky lg:top-28 lg:self-start"
-            style={{ backgroundColor: product.tint }}
-          >
-            <span aria-hidden>{product.emoji}</span>
-            {save > 0 && (
-              <span className="absolute left-4 top-4 rounded-full bg-white px-3.5 py-1.5 text-sm font-bold text-leaf">
-                {percentOff}% off
-              </span>
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <div
+              className="relative grid aspect-square place-items-center overflow-hidden rounded-[2rem] text-[9rem] sm:text-[12rem]"
+              style={{ backgroundImage: `linear-gradient(160deg, white, ${product.tint})` }}
+            >
+              <span
+                className="absolute inset-[16%] rounded-full opacity-80 blur-3xl"
+                style={{ backgroundColor: product.tint }}
+                aria-hidden
+              />
+              {product.image ? (
+                <Image
+                  src={thumb(product.image, 900)}
+                  alt={`${product.name}, ${product.size}`}
+                  fill
+                  preload
+                  sizes="(min-width: 1024px) 560px, 92vw"
+                  className="object-contain p-[9%] drop-shadow-[0_24px_28px_rgba(11,59,60,0.28)]"
+                />
+              ) : (
+                <span className="relative" aria-hidden>
+                  {product.emoji}
+                </span>
+              )}
+              {save > 0 && (
+                <span className="absolute left-4 top-4 rounded-full bg-rani px-3.5 py-1.5 text-sm font-bold text-white shadow-md">
+                  {percentOff}% off
+                </span>
+              )}
+            </div>
+            {product.image && (
+              <p className="mt-3 text-center text-xs text-muted-foreground">
+                Product image is for reference. The pack at the shop may look slightly different.
+              </p>
             )}
           </div>
 
           <div>
+            <p className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-saffron-soft px-3 py-1.5 text-sm font-bold text-ink">
+              <Clock className="size-4 text-leaf" aria-hidden />
+              {store?.eta ?? "Quick delivery"}
+            </p>
+            {product.brand && (
+              <p className="mb-1 text-sm font-black uppercase tracking-wider text-rani">{product.brand}</p>
+            )}
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
               {product.name}
             </h1>
@@ -108,6 +150,38 @@ export default async function ProductPage({ params }: Props) {
             <div className="mt-6 hidden md:block">
               <AddToBasket product={product} />
             </div>
+
+            {shelfMates.length > 0 && (
+              <section className="mt-8" aria-labelledby="other-options">
+                <h2 id="other-options" className="text-sm font-semibold text-muted-foreground">
+                  Other options on this shelf
+                </h2>
+                <ul className="-mx-1 mt-3 flex gap-3 overflow-x-auto px-1 pb-2 [scrollbar-width:none]">
+                  {shelfMates.map((p) => (
+                    <li key={p.id} className="w-32 shrink-0">
+                      <Link
+                        href={`/product/${p.id}`}
+                        className="block rounded-2xl bg-white p-2 ring-1 ring-border outline-none transition hover:-translate-y-0.5 hover:ring-ink/30 focus-visible:ring-2 focus-visible:ring-ink"
+                      >
+                        <span
+                          className="relative grid aspect-square place-items-center overflow-hidden rounded-xl text-4xl"
+                          style={{ backgroundColor: p.tint }}
+                        >
+                          {p.image ? (
+                            <Image src={thumb(p.image, 240)} alt="" fill sizes="128px" className="object-contain p-1.5" />
+                          ) : (
+                            <span aria-hidden>{p.emoji}</span>
+                          )}
+                        </span>
+                        <span className="mt-2 line-clamp-2 block min-h-[2.5em] text-xs font-bold leading-tight">{p.name}</span>
+                        <span className="mt-0.5 block text-xs text-muted-foreground">{p.size}</span>
+                        <span className="block text-sm font-bold">{formatPrice(p.price)}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
             {store && (
               <section
